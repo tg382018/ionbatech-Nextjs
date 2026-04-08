@@ -167,7 +167,11 @@ export function SiteHeader() {
               src={logoSrc}
               alt={logoAlt}
               fill
-              className="object-contain object-left"
+              className={cn(
+                "object-contain object-left transition-[filter] duration-300",
+                lightOnVideo && "brightness-0 invert",
+                !isHome && "brightness-0 invert",
+              )}
               sizes="(max-width: 640px) 152px, 176px"
               priority
             />

@@ -6,7 +6,7 @@ export const brandName = "IonBATech";
 export const logoSrc = "/logo.webp";
 export const logoAlt = "IonBATech";
 
-export const storeBaseUrl = siteUrl;
+export const storeBaseUrl = "https://market.ionbatech.com";
 
 export const navLinks = [
   { label: "Anasayfa", href: "#anasayfa" },
@@ -405,8 +405,8 @@ export const footerContent = {
     ],
   },
   social: [
-    { label: "LinkedIn", href: `${storeBaseUrl}` },
-    { label: "Instagram", href: `${storeBaseUrl}` },
+    { label: "LinkedIn", href: `${siteUrl}` },
+    { label: "Instagram", href: `${siteUrl}` },
   ],
   legal: `© ${new Date().getFullYear()} IonBATech. Tüm hakları saklıdır.`,
 } as const;

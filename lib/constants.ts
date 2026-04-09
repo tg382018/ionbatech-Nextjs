@@ -233,16 +233,41 @@ export const systemArchitectureSection = {
   title: "Modern enerji sistemi nasıl işler?",
   subtitle:
     "Üretim, dönüşüm, depolama ve tüketim tek zincirde tanımlanır; her halka bir öncekinin sınırlarına göre boyutlanır.",
-  flow: [
-    { label: "Solar paneller", hint: "DC üretim" },
-    { label: "İnverter", hint: "DC/AC dönüşüm, yönetim" },
-    { label: "Batarya", hint: "Depolama, yedek enerji" },
-    { label: "Yük", hint: "Konut, işletme, pompa" },
-    { label: "Şebeke / Off-grid", hint: "Bağlantı veya ada modu" },
-  ] as const,
+  diagramHeadline: "Sistemin kalbi: inverter",
+  diagramLead:
+    "Tüm enerji kaynakları ve depolama birimleri merkezdeki inverterde toplanır; yönetilen ve dönüştürülen enerji son olarak tüketime yönlendirilir.",
+  hub: {
+    title: "Akıllı inverter",
+    description:
+      "Sistemin kalbi. Tüm enerjiyi toplar, dönüştürür ve yönetir.",
+  },
+  nodes: {
+    grid: {
+      title: "Şebeke / Off-grid",
+      subtitle: "Çift yönlü aktarım",
+    },
+    solar: {
+      title: "Solar paneller",
+      subtitle: "Ana DC üretim kaynağı",
+    },
+    battery: {
+      title: "Batarya grubu",
+      subtitle: "Depolama ve yedekleme",
+    },
+    load: {
+      title: "Son kullanıcı (ev)",
+      subtitle: "Konut, işletme, yük",
+    },
+  },
+  safeFlowTitle: "Güvenli ve kesintisiz akış",
+  safeFlowBody:
+    "İnverter; güneş panellerinden, şebekeden ve bataryadan gelen gücü eş zamanlı hesaplar. Enerji üretiminin yüksek olduğu anlarda bataryayı şarj ederken, tüketimin arttığı anlarda depolanan gücü devreye sokarak eve giden enerjinin kesintisiz kalmasına yardımcı olur.",
   integrationTitle: "Kapasite planlama ve entegrasyon",
-  integrationBody:
-    "Panel gücü, inverter nominal ve tepe gücü, kullanılabilir batarya kapasitesi ve yedek süresi beraber hesaplanır. Koruma cihazları, kablo boyutları ve BMS limitleri bu hesabın parçasıdır. Entegrasyon; sadece kabloları bağlamak değil, tüm bileşenlerin güvenli çalışma sınırları içinde birlikte çalışmasını sağlamaktır.",
+  integrationParagraphs: [
+    "Panel gücü, inverter nominal ve tepe gücü, kullanılabilir batarya kapasitesi ve yedek süresi bir bütün olarak hesaplanır.",
+    "Koruma cihazları, kablo boyutları ve BMS (Batarya Yönetim Sistemi) limitleri bu mühendisliğin ayrılmaz parçasıdır.",
+    "Gerçek entegrasyon; sadece kabloları bağlamak değil, tüm bileşenlerin maksimum verim ve güvenli çalışma sınırları içinde senkronize olmasını sağlamaktır.",
+  ] as const,
 } as const;
 
 export const useCasesSection = {

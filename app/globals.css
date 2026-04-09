@@ -192,3 +192,111 @@
     animation: none;
   }
 }
+
+/* Hub diyagramı: enerji akışı çizgileri */
+@keyframes energy-flow-dash {
+  to {
+    stroke-dashoffset: -45;
+  }
+}
+
+.animate-energy-flow-line {
+  stroke-dasharray: 4 10;
+  animation: energy-flow-dash 1.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-energy-flow-line {
+    animation: none;
+  }
+}
+
+@keyframes hub-pulse-ring {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.02);
+  }
+}
+
+.animate-hub-pulse {
+  animation: hub-pulse-ring 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hub-pulse {
+    animation: none;
+    opacity: 0.35;
+  }
+}
+
+@keyframes diagram-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-diagram-float {
+  animation: diagram-float 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-diagram-float {
+    animation: none;
+  }
+}
+
+/* Mimari bölümü: yan yana kartların hareketli gradient arka planı */
+@keyframes arch-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.arch-card-animated-bg-dark {
+  background-image: linear-gradient(
+    125deg,
+    #0f172a 0%,
+    #1e293b 22%,
+    #164e63 45%,
+    #0c4a6e 68%,
+    #0f172a 100%
+  );
+  background-size: 280% 280%;
+  animation: arch-gradient-shift 14s ease infinite;
+}
+
+.arch-card-animated-bg-brand {
+  background-image: linear-gradient(
+    125deg,
+    oklch(0.38 0.14 148) 0%,
+    oklch(0.42 0.15 155) 25%,
+    oklch(0.34 0.12 165) 50%,
+    oklch(0.4 0.14 150) 75%,
+    oklch(0.36 0.13 158) 100%
+  );
+  background-size: 280% 280%;
+  animation: arch-gradient-shift 11s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch-card-animated-bg-dark,
+  .arch-card-animated-bg-brand {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}

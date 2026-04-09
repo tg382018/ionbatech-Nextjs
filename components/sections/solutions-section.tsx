@@ -29,10 +29,10 @@ const solutionIcons: Record<SolutionIconKey, typeof Battery> = {
 
 function bentoCellClass(iconKey: SolutionIconKey): string {
   switch (iconKey) {
-    case "solar":
-      return "md:col-span-2 md:row-span-2 md:min-h-[300px]";
-    case "battery":
     case "storage":
+      return "md:col-span-2 md:row-span-2 md:min-h-[220px]";
+    case "solar":
+    case "battery":
       return "";
     case "inverter":
     case "irrigation":
@@ -79,7 +79,7 @@ export function SolutionsSection() {
   return (
     <section
       id={solutionsSection.id}
-      className="relative scroll-mt-24 overflow-hidden py-20 sm:py-28"
+      className="relative scroll-mt-24 overflow-hidden py-14 sm:py-20"
       aria-labelledby="solutions-heading"
     >
       {/* Ambient gradient orbs */}
@@ -91,7 +91,7 @@ export function SolutionsSection() {
       <Container className="relative">
         {/* Section header */}
         <motion.div
-          className="mb-14 max-w-2xl"
+          className="mb-8 max-w-2xl sm:mb-10"
           initial={reduceMotion ? undefined : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
@@ -103,18 +103,18 @@ export function SolutionsSection() {
           </span>
           <h2
             id="solutions-heading"
-            className="mt-4 font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="mt-4 font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
           >
             {solutionsSection.title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
             {solutionsSection.subtitle}
           </p>
         </motion.div>
 
         {/* Bento grid */}
         <motion.div
-          className="grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+          className="grid auto-rows-fr gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-4"
           initial={reduceMotion ? undefined : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-64px" }}
@@ -124,7 +124,7 @@ export function SolutionsSection() {
             const Icon = solutionIcons[item.iconKey];
             return (
               <motion.div
-                key={item.iconKey}
+                key={item.title}
                 className={cn("h-full min-h-0", bentoCellClass(item.iconKey))}
                 variants={itemVariants}
               >
@@ -133,6 +133,7 @@ export function SolutionsSection() {
                   icon={Icon}
                   title={item.title}
                   description={item.description}
+                  benefits={item.benefits}
                   href={item.href}
                   imageSrc={item.imageSrc}
                   imageAlt={item.imageAlt}

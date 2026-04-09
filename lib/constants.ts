@@ -11,7 +11,9 @@ export const storeBaseUrl = "https://market.ionbatech.com";
 export const navLinks = [
   { label: "Anasayfa", href: "#anasayfa" },
   { label: "Çözümler", href: "#cozumler" },
-  { label: "Kategoriler", href: "#kategoriler" },
+  { label: "Riskler", href: "#yaygin-hatalar" },
+  { label: "Mimari", href: "#sistem-mimarisi" },
+  { label: "Senaryolar", href: "#kullanim-senaryolari" },
   { label: "Ürünler", href: storeBaseUrl },
   { label: "Neden Biz", href: "#neden-biz" },
   { label: "SSS", href: "#sss" },
@@ -22,19 +24,13 @@ export const contactHref = `${storeBaseUrl}/iletisim`;
 export const shopHomeHref = storeBaseUrl;
 
 export const heroContent = {
-  /** Hero: iki satır serif başlık (referans düzen) */
-  headlineLine1: "Güç ve depolama yatırımınız şansa kalmasın.",
-  headlineLine2: "Mühendislikle tanımlı sistem, ölçülebilir sonuç.",
+  headlineLine1: "Enerji depolama ve solar sistemlerde",
+  headlineLine2: "mühendislikle kurulan güvenilir altyapı.",
   subheading:
-    "IonBATech; batarya, güneş enerjisi ve güç elektroniğinde güvenilir tedarik ve teknik yönlendirme sunar.",
-  /** Ana yeşil CTA (uzun hap buton) */
-  leadCta: {
-    label: "Size uygun ürün ve sistem planını görün",
-    href: shopHomeHref,
-  },
-  primaryCta: { label: "Ürünleri İncele", href: shopHomeHref },
-  secondaryCta: { label: "Mühendisle Görüş", href: contactHref },
-  tertiaryCta: { label: "Çözümler", href: "#cozumler" },
+    "IonBATech yalnızca ürün satmaz: yük profilinize göre batarya ve inverter eşleştirmesi, koruma katmanları ve uzun vadeli çalışırılırlık için sistem tasarımı ve danışmanlık sunar.",
+  primaryCta: { label: "Teklif Al", href: contactHref },
+  secondaryCta: { label: "Sistem Planınızı Görün", href: "#surec" },
+  tertiaryCta: { label: "Çözümlerimiz", href: "#cozumler" },
 } as const;
 
 /** Full-bleed hero: video arka plan + poster / hareket azaltma yedeği. */
@@ -43,40 +39,41 @@ export const heroBanner = {
   imageSrc:
     "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=2400&q=80",
   imageAlt: "Modern çatı üzerinde güneş panelleri kurulumu",
-  badge: "Şeffaf süreç · Teknik netlik",
+  badge: "Sistem entegrasyonu · Kapasite planlama · Teknik destek",
 } as const;
 
 export const heroTrustBadgeItems = [
-  { label: "Mühendislik Odaklı", icon: "cpu" as const },
-  { label: "Güvenli Altyapı", icon: "shield" as const },
-  { label: "Hızlı Destek", icon: "headset" as const },
+  { label: "Doğru kapasite planlama", icon: "cpu" as const },
+  { label: "BMS ve koruma katmanları", icon: "shield" as const },
+  { label: "Kurulum sonrası teknik destek", icon: "headset" as const },
 ] as const;
 
+/** Güven / otorite şeridi (ürün değil, iş yapış şekli). */
 export const brandTrustStripItems = [
   {
-    label: "Batarya Teknolojileri",
-    subtitle: "LiFePO₄ & Modüler",
-    key: "battery" as const,
+    label: "Mühendislik yaklaşımı",
+    subtitle: "Ölçüm ve senaryoya dayalı tasarım",
+    key: "engineering" as const,
   },
   {
-    label: "Enerji Depolama",
-    subtitle: "Kapasite planlama",
-    key: "storage" as const,
+    label: "Güvenli enerji altyapısı",
+    subtitle: "Koruma, BMS ve uyum kontrolleri",
+    key: "safety" as const,
   },
   {
-    label: "Solar Sistemler",
-    subtitle: "Panel & Inverter",
-    key: "solar" as const,
+    label: "Doğru ürün seçimi",
+    subtitle: "İnverter, batarya, panel eşleştirmesi",
+    key: "selection" as const,
   },
   {
-    label: "Tarımsal Uygulamalar",
-    subtitle: "Solar sulama",
-    key: "agri" as const,
+    label: "Satış sonrası destek",
+    subtitle: "Devreye alma ve soru yanıtı",
+    key: "support" as const,
   },
   {
-    label: "EV Şarj Çözümleri",
-    subtitle: "İstasyon & Altyapı",
-    key: "ev" as const,
+    label: "Kayseri merkezli operasyon",
+    subtitle: "Türkiye geneli lojistik",
+    key: "hq" as const,
   },
 ] as const;
 
@@ -90,75 +87,194 @@ export type SolutionIconKey =
 
 export const solutionsSection = {
   id: "cozumler",
-  title: "Enerji İhtiyacınıza Uygun Çözümler",
+  title: "IonBATech çözümleri",
   subtitle:
-    "Uygulama senaryonuza göre doğru bileşenleri seçmenize yardımcı olacak çözüm hatlarımız.",
+    "Konut, villa, tarım, ticari ve küçük endüstri için depolama, üretim ve güç elektroniğini tek mimaride birleştiriyoruz.",
   items: [
     {
-      iconKey: "solar" as const,
+      iconKey: "storage" as const,
       bento: "hero" as const,
-      title: "Güneş Enerjisi Sistemleri",
+      title: "Enerji Depolama Sistemleri",
       description:
-        "Panel, yapılandırma ve paket sistem yaklaşımıyla üretim tarafını net ve ölçülebilir kılın.",
-      href: `${storeBaseUrl}/solar-paket-sistemler`,
+        "Şebeke destekli, adaya özel veya hibrit senaryolarda günlük çevrim ve tepe güç ihtiyacına göre tasarlanan ESS hatları.",
+      benefits: [
+        "Kapasite ve güç sınıfının yük profiline göre netleştirilmesi",
+        "Genişleme payı ile modüler büyüme planı",
+        "Aşırı akım, gerilim ve sıcaklık için koruma stratejisi",
+      ] as const,
+      href: `${storeBaseUrl}/bataryalar`,
       imageSrc:
-        "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1400&q=80",
-      imageAlt: "Güneş panelleri ve açık gökyüzü",
+        "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=1400&q=80",
+      imageAlt: "Yenilenebilir enerji ve depolama altyapısı",
     },
     {
       iconKey: "battery" as const,
       bento: "tile" as const,
-      title: "Lityum Batarya Çözümleri",
+      title: "LiFePO4 Batarya Sistemleri",
       description:
-        "LiFePO₄ ve modüler paket seçenekleriyle konut, ticari ve endüstriyel ihtiyaçlar için güvenli enerji arabelleği.",
+        "LiFePO₄ kimyası, dengeli deşarj eğrileri ve BMS ile uzun ömürlü, güvenli paketler; gerekirse özel batarya konfigürasyonları.",
+      benefits: [
+        "Döngü ömrü ve termal stabilite için uygun kimya seçimi",
+        "Hücre dengesi ve batarya yönetim sistemi (BMS) uyumu",
+        "İnverter ve şarj kaynağı ile doğru voltaj bloğu eşlemesi",
+      ] as const,
       href: `${storeBaseUrl}/lityum-bataryalar`,
       imageSrc:
         "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektrik panosu ve güç dağıtım ekipmanı",
+      imageAlt: "Enerji depolama ve güç ekipmanları",
     },
     {
-      iconKey: "storage" as const,
+      iconKey: "solar" as const,
       bento: "tile" as const,
-      title: "Enerji Depolama Sistemleri",
+      title: "Solar Enerji Sistemleri",
       description:
-        "Şebeke, hibrit ve adaya özgü senaryolarda kapasite ve güç dengesini sağlayan depolama mimarileri.",
-      href: `${storeBaseUrl}/bataryalar`,
+        "Panel dizilimi, üretim tahmini ve depolama veya şebeke ile entegrasyon için doğru boyutlandırma.",
+      benefits: [
+        "Üretim ve tüketim dengesine göre panel gücü",
+        "On-grid, off-grid veya hibrit topoloji seçimi",
+        "Paket veya özel tasarım; yatırımınıza uygun ölçek",
+      ] as const,
+      href: `${storeBaseUrl}/solar-paket-sistemler`,
       imageSrc:
-        "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Yenilenebilir enerji santrali ve gökyüzü",
+        "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
+      imageAlt: "Güneş panelleri",
     },
     {
       iconKey: "inverter" as const,
       bento: "tile" as const,
       title: "İnverter ve Güç Elektroniği",
       description:
-        "Off-grid, on-grid ve hibrit inverterler; sulama ve sürücü uygulamaları için güç dönüşümü.",
+        "Off-grid, on-grid ve hibrit inverterler; yedek güç, pompa sürücüleri ve güç kalitesi ihtiyacına göre seçim.",
+      benefits: [
+        "Tepe yük ve sürekli güç için doğru inverter sınıfı",
+        "Batarya ve PV girişlerinin uyumlu yönetimi",
+        "Koruma röleleri ve şebeke kurallarına uygun yapılandırma",
+      ] as const,
       href: `${storeBaseUrl}/inverterler`,
       imageSrc:
         "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektronik devre kartı ve bileşenler",
+      imageAlt: "Güç elektroniği bileşenleri",
     },
     {
       iconKey: "irrigation" as const,
       bento: "tile" as const,
       title: "Tarımsal Solar Sulama",
       description:
-        "Pompa gücü, başlangıç akımı ve saha koşullarına uygun sulama odaklı güç sistemleri.",
+        "Pompa başlangıç akımı, günlük sulama süresi ve parsel koşullarına göre solar + gerektiğinde depolama tasarımı.",
+      benefits: [
+        "Motor ve pompa için başlangıç gücü hesabı",
+        "Şebeke olmadan veya hibrit sulama senaryoları",
+        "Mevsimsel üretim dalgalanmasına dayanıklı yapı",
+      ] as const,
       href: `${storeBaseUrl}/tarimsal-sulama-sistemleri`,
       imageSrc:
         "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Seralarda damla sulama sistemi",
+      imageAlt: "Tarımsal sulama ve sera",
     },
     {
       iconKey: "ev" as const,
       bento: "tile" as const,
-      title: "Elektrikli Araç Şarj Çözümleri",
+      title: "EV Şarj Çözümleri",
       description:
-        "Konut, işletme ve küçük filo ihtiyaçları için AC/DC şarj ürünleri ve aksesuarlar.",
+        "Konut, işletme ve küçük filolar için AC/DC istasyonlar; tesis altyapısı ve mevcut güç sınırına göre planlama.",
+      benefits: [
+        "Mevcut enerji sistemine uygun şarj gücü",
+        "Yük yönetimi ve ileride genişlemeye açık altyapı",
+        "Ürün seçimi ve teknik yönlendirme",
+      ] as const,
       href: `${storeBaseUrl}/elektrikli-arac-sarj-istasyonlari`,
       imageSrc:
         "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektrikli araç şarj istasyonu",
+      imageAlt: "Elektrikli araç şarj noktası",
+    },
+  ],
+} as const;
+
+export const problemSection = {
+  id: "yaygin-hatalar",
+  title: "Enerji sistemlerinde sık görülen teknik hatalar",
+  subtitle:
+    "Katalogdan parça seçmek ile mühendislik tasarımı aynı şey değildir. Yanlış boyutlandırma ve uyumsuz bileşenler kısa ömür, kesinti ve güvenlik riskine yol açar.",
+  intro:
+    "Doğru mimari; yük listesi, çalışma süresi, şarj kaynakları ve koruma senaryolarının birlikte ele alınmasıyla oluşur. Aşağıdaki hataların çoğu, analiz ve entegrasyon adımının atlanmasından kaynaklanır.",
+  problems: [
+    {
+      title: "Yanlış batarya kapasitesi",
+      description:
+        "Sadece kWh rakamına odaklanmak, tepe güç, derin deşarj ve sıcaklık marjını göz ardı etmek erken kapasite düşüşüne ve kesintilere neden olur.",
+    },
+    {
+      title: "İnverter uyumsuzluğu",
+      description:
+        "Batarya voltajı, şarj profili ve haberleşme (BMS / protokol) inverter ile örtüşmediğinde sistem ya verimli çalışmaz ya da koruma moduna düşer.",
+    },
+    {
+      title: "Panel ve depolama dengesizliği",
+      description:
+        "Aşırı veya yetersiz PV gücü, bataryanın şebeke dışı senaryolarda ya şişmesine ya da dolmadan tükenmesine yol açar.",
+    },
+    {
+      title: "Ucuz ama güvensiz ekipmanlar",
+      description:
+        "Belirsiz BMS, yetersiz koruma sınıfları ve belgesiz ürünler yangın ve ekipman arızası riskini artırır; uzun vadede maliyeti yükseltir.",
+    },
+    {
+      title: "Yanlış sistem tasarımı",
+      description:
+        "Kablo kesitleri, sigorta-kesen seçimi, topraklama ve AC/DC ayrımı gibi detaylar atlandığında kurulum “çalışıyor” görünse bile sürdürülebilir değildir.",
+    },
+  ],
+  closing:
+    "IonBATech projeleri bu yüzden ürün listesinden önce enerji ihtiyaç analizi ve sistem mimarisi ile başlatır; bileşenler bu çerçeveye oturtulur.",
+} as const;
+
+export const systemArchitectureSection = {
+  id: "sistem-mimarisi",
+  title: "Modern enerji sistemi nasıl işler?",
+  subtitle:
+    "Üretim, dönüşüm, depolama ve tüketim tek zincirde tanımlanır; her halka bir öncekinin sınırlarına göre boyutlanır.",
+  flow: [
+    { label: "Solar paneller", hint: "DC üretim" },
+    { label: "İnverter", hint: "DC/AC dönüşüm, yönetim" },
+    { label: "Batarya", hint: "Depolama, yedek enerji" },
+    { label: "Yük", hint: "Konut, işletme, pompa" },
+    { label: "Şebeke / Off-grid", hint: "Bağlantı veya ada modu" },
+  ] as const,
+  integrationTitle: "Kapasite planlama ve entegrasyon",
+  integrationBody:
+    "Panel gücü, inverter nominal ve tepe gücü, kullanılabilir batarya kapasitesi ve yedek süresi beraber hesaplanır. Koruma cihazları, kablo boyutları ve BMS limitleri bu hesabın parçasıdır. Entegrasyon; sadece kabloları bağlamak değil, tüm bileşenlerin güvenli çalışma sınırları içinde birlikte çalışmasını sağlamaktır.",
+} as const;
+
+export const useCasesSection = {
+  id: "kullanim-senaryolari",
+  title: "Kullanım senaryoları",
+  subtitle:
+    "Bağ evinden çiftliğe, ticari çatıdan kesintiye dayanıklı yedek güce kadar gerçek saha örnekleri.",
+  items: [
+    {
+      title: "Bağ evi enerji sistemi",
+      description:
+        "Sınırlı şebeke veya tam ada kullanımında gün içi tüketim ve gece yedek süresi için solar + LiFePO₄ ve doğru inverter gücü.",
+    },
+    {
+      title: "Çiftlik ve tarımsal sulama",
+      description:
+        "Pompa motorunun başlangıç akımı ve sulama pencereleri dikkate alınarak solar ve gerekirse tamamlayıcı depolama tasarımı.",
+    },
+    {
+      title: "Ticari bina enerji depolama",
+      description:
+        "Tepe yükleri yumuşatma, kesinti anında kritik yükleri ayırma veya üretim-tüketim dengesini iyileştirme odaklı ESS.",
+    },
+    {
+      title: "Elektrik kesintisine karşı yedek güç",
+      description:
+        "Şebeke düştüğünde otomatik devreye giren yedek mimarisi; yük önceliklendirme ve batarya sağlık izleme ile planlanır.",
+    },
+    {
+      title: "Solar + batarya hibrit sistemler",
+      description:
+        "Gündüz üretimi depolayıp gece veya yüksek tarifede kullanma; şebeke ile güvenli paralel çalışma için doğru inverter ve koruma.",
     },
   ],
 } as const;
@@ -167,43 +283,43 @@ export const whyUsSection = {
   id: "neden-biz",
   title: "Neden IonBATech?",
   subtitle:
-    "Enerji donanımında teknik doğruluk ve tedarik güveni bir arada olmalı; bunu standart kabul ediyoruz.",
+    "Türkiye’de enerji depolama ve solar alanında ürün çeşitliliği tek başına yeterli değildir; güvenilir sistem teslimi için mühendislik ve satış desteği birlikte sunulmalıdır.",
   items: [
     {
       key: "engineering" as const,
-      title: "Mühendislik yaklaşımı",
+      title: "Mühendislik odaklı sistem tasarımı",
       description:
-        "Ürün seçiminde katalogdan öte; yük, çevrim ve saha koşullarına göre mantıklı eşleştirme.",
+        "Yük listesi ve çalışma profiline göre topoloji seçilir; hazır paket yerine senaryonuza uygun mimari önerilir.",
     },
     {
-      key: "custom" as const,
-      title: "İhtiyaca özel çözümleme",
+      key: "products" as const,
+      title: "Güvenilir ürün seçimi",
       description:
-        "Hazır paketlerden özel konfigürasyonlara kadar proje ölçeğinize uygun alternatifler.",
+        "Batarya, inverter ve güç elektroniğinde belgelendirme ve saha geri bildirimleriyle uyumlu ürün hatları.",
     },
     {
-      key: "catalog" as const,
-      title: "Güvenilir ürün seçkisi",
+      key: "modular" as const,
+      title: "Modüler batarya mimarisi",
       description:
-        "Batarya, inverter ve solar hattında tutarlı kalite ve belgelendirme beklentisiyle seçilmiş ürünler.",
+        "İleride kapasite artışını öngören paralel modül düzenleri; mevcut inverter ve koruma sınırlarıyla uyumlu büyüme.",
+    },
+    {
+      key: "capacity" as const,
+      title: "Doğru kapasite planlama",
+      description:
+        "kWh yanında kW tepe gücü, yedek süre ve şarj kaynakları birlikte hesaplanır; aşırı veya yetersiz investasyon önlenir.",
     },
     {
       key: "support" as const,
-      title: "Satış öncesi ve sonrası destek",
+      title: "Satış sonrası teknik destek",
       description:
-        "Kurulum öncesi teknik sorular ve sonrası yönlendirme için erişilebilir iletişim kanalları.",
+        "Kurulum öncesi uyumluluk soruları ve devreye alma aşamasında teknik yönlendirme; erişilebilir iletişim kanalları.",
     },
     {
-      key: "local" as const,
-      title: "Yerel ulaşılabilirlik",
+      key: "logistics" as const,
+      title: "Türkiye genelinde lojistik",
       description:
-        "Kayseri merkezli operasyon anlayışıyla Türkiye genelinde sipariş ve lojistik süreçlerine odaklanma.",
-    },
-    {
-      key: "field" as const,
-      title: "Saha odaklı yaklaşım",
-      description:
-        "Tarımsal sulama, bağ evi, ticari çatı ve benzeri gerçek kullanım senaryolarına pratik çözümler.",
+        "Kayseri merkezli operasyonla sipariş ve sevkiyat süreçlerinin ülke genelinde yönetimi.",
     },
   ],
 } as const;
@@ -212,30 +328,30 @@ export type WhyUsItemKey = (typeof whyUsSection.items)[number]["key"];
 
 export const categoriesSection = {
   id: "kategoriler",
-  title: "Öne Çıkan Kategoriler",
+  title: "Ürün grupları özeti",
   subtitle:
-    "Mağazamızdaki ana ürün gruplarına hızlı geçiş yapın; detaylı listelemeler için vitrinimize yönlendiriyoruz.",
+    "Mağazamızdaki ana hatlar; detaylı modeller ve stok için vitrine yönlendiriyoruz.",
   items: [
     {
-      title: "Bataryalar",
-      href: `${storeBaseUrl}/bataryalar`,
-      description: "Lityum paketler ve taşınabilir güç ürünleri",
+      title: "LiFePO4 Bataryalar",
+      href: `${storeBaseUrl}/lityum-bataryalar`,
+      description: "Paket sistemler, modüler bloklar ve özel konfigürasyon ihtiyaçları",
       imageSrc:
         "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektrik panosu ve güç ekipmanları",
+      imageAlt: "Batarya ve güç ekipmanları",
     },
     {
-      title: "İnverterler",
+      title: "İnverter Sistemleri",
       href: `${storeBaseUrl}/inverterler`,
-      description: "Off-grid, on-grid, hibrit ve sulama hatları",
+      description: "Off-grid, on-grid, hibrit ve sulama uygulamaları",
       imageSrc:
         "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektronik devre kartı",
+      imageAlt: "İnverter ve elektronik",
     },
     {
-      title: "Güneş Panelleri",
+      title: "Solar Paneller",
       href: `${storeBaseUrl}/gunes-panelleri`,
-      description: "Sabit ve taşınabilir panel seçenekleri",
+      description: "Sabit ve taşınabilir PV modüller",
       imageSrc:
         "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80",
       imageAlt: "Güneş panelleri",
@@ -246,52 +362,52 @@ export const categoriesSection = {
       description: "Önceden ölçeklenmiş komple paketler",
       imageSrc:
         "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Çatıda güneş enerjisi kurulumu",
+      imageAlt: "Çatı solar kurulumu",
     },
     {
-      title: "Tarımsal Sulama Sistemleri",
+      title: "Tarımsal Sulama Çözümleri",
       href: `${storeBaseUrl}/tarimsal-sulama-sistemleri`,
-      description: "Pompa ve sulama odaklı güç çözümleri",
+      description: "Pompa gücü ve sahaya uygun güç aktarımı",
       imageSrc:
         "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Sera ve damla sulama",
+      imageAlt: "Tarımsal sulama",
     },
     {
-      title: "EV Şarj Ürünleri",
+      title: "EV Şarj Üniteleri",
       href: `${storeBaseUrl}/elektrikli-arac-sarj-istasyonlari`,
-      description: "İstasyon, ünite ve aksesuarlar",
+      description: "Konut ve işletme tipi şarj istasyonları",
       imageSrc:
         "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1200&q=80",
-      imageAlt: "Elektrikli araç şarj istasyonu",
+      imageAlt: "EV şarj",
     },
   ],
 } as const;
 
 export const processSection = {
   id: "surec",
-  title: "Nasıl Çalışıyoruz?",
+  title: "Çalışma sürecimiz",
   subtitle:
-    "Tek tip satış akışı yerine, ihtiyacı netleştiren ve doğru ürüne yönlendiren sade bir süreç.",
+    "Tek tip paket satmak yerine önce ihtiyacı ölçüyor, sonra mimariyi ve ürün listesini birlikte netleştiriyoruz.",
   steps: [
     {
-      title: "İhtiyacı Analiz Ediyoruz",
+      title: "Enerji ihtiyacı analizi",
       description:
-        "Yük profili, çalışma süresi, şebeke durumu ve saha kısıtlarını birlikte değerlendiririz.",
+        "Yük listesi, günlük ve mevsimsel kullanım, şebeke durumu ve yedek süre beklentisi birlikte değerlendirilir.",
     },
     {
-      title: "Doğru Sistemi Kurguluyoruz",
+      title: "Sistem mimarisi tasarımı",
       description:
-        "Batarya kapasitesi, inverter gücü ve koruma katmanları için dengeli bir mimari öneririz.",
+        "Solar, inverter, batarya ve koruma topolojisi çizilir; kapasite ve güç sınıfları bu mimariye bağlanır.",
     },
     {
-      title: "Uygun Ürün ve Çözümü Sunuyoruz",
+      title: "Doğru ürün seçimi",
       description:
-        "Stoklu ürün gruplarımızdan projenize uygun konfigürasyonu ve alternatifleri paylaşırız.",
+        "Stoklu hatlarımızdan uyumlu batarya, inverter ve çevre ekipmanı seçilir; alternatifler şeffaf biçimde paylaşılır.",
     },
     {
-      title: "Destek ve Yönlendirme Sağlıyoruz",
+      title: "Kurulum ve teknik destek",
       description:
-        "Kurulum ve devreye alma aşamalarında teknik sorularınıza yanıt ve yönlendirme sunarız.",
+        "Saha ekibiniz veya partner kurulumla eş zamanlı teknik sorularınız yanıtlanır; devreye alma kontrolleri yönlendirilir.",
     },
   ],
 } as const;
@@ -331,65 +447,80 @@ export const statsSection = {
 
 export const faqSection = {
   id: "sss",
-  title: "Sıkça Sorulan Sorular",
+  title: "Sıkça sorulan sorular",
   subtitle:
-    "Enerji donanımı seçiminde en çok tekrar eden konulara kısa ve net yanıtlar.",
+    "Depolama, solar ve güvenlik konularında en sık yöneltilen teknik sorulara özet yanıtlar.",
   items: [
     {
-      id: "faq-battery",
-      question: "Hangi batarya çözümlerini sunuyorsunuz?",
+      id: "faq-storage",
+      question: "Enerji depolama sistemi nasıl seçilir?",
       answer:
-        "Lityum teknolojili paketler, modüler depolama üniteleri ve taşınabilir güç ürünleri başta olmak üzere farklı voltaj ve kapasite seçenekleri sunuyoruz. Uygulamanıza göre doğru kimyasayı ve BMS uyumunu birlikte değerlendiririz.",
+        "Önce yük listesi ve yedek süre hedefi netleştirilir. Günlük çevrilebilir enerji (kWh), tepe güç (kW), şarj kaynağı (şebeke / PV) ve sıcaklık aralığı birlikte incelenir. İnverterin batarya voltajı ve BMS ile uyumu, kablo ve koruma bileşenleri aynı tasarımın parçasıdır.",
     },
     {
-      id: "faq-ess",
-      question: "Enerji depolama sistemi seçerken nelere dikkat edilmeli?",
+      id: "faq-lifepo4",
+      question: "LiFePO4 batarya neden tercih edilir?",
       answer:
-        "Günlük derin deşarj, tepe güç ihtiyacı, şarj kaynağı, sıcaklık aralığı ve genişleme payı temel başlıklardır. İnverter ve koruma ekipmanlarıyla uyum, uzun ömür için en az kapasite kadar kritiktir.",
+        "LiFePO₄ kimyası termal olarak daha stabil kabul edilir ve döngü ömrü tipik olarak tüketici sınıfı lityum iyonlara göre daha öngörülebilirdir. Ancak yine de doğru BMS, hücre dengesi ve inverter şarj ayarları şarttır; ürün kalitesi ve belgelendirme seçimi kritiktir.",
+    },
+    {
+      id: "faq-outage",
+      question: "Solar sistem elektrik kesintisinde çalışır mı?",
+      answer:
+        "Yalnızca paneller yetmez; kesintide yedek için uygun inverter topolojisi (ada veya yedek çıkış), batarya ve koruma şeması gerekir. On-grid-only kurulumlar şebeke düştüğünde üretimi güvenlik nedeniyle durdurabilir. İhtiyacınıza göre off-grid veya hibrit mimari tanımlanmalıdır.",
+    },
+    {
+      id: "faq-cottage",
+      question: "Bağ evi için hangi sistem gerekir?",
+      answer:
+        "Kullanılan cihazlar, gece çalışma süresi ve şebeke varlığına göre değişir. Küçük ada sistemlerde genelde solar + LiFePO₄ + off-grid/hibrit inverter; yük listesi kabaca çıkarılıp batarya kWh ve inverter kW buna göre seçilir.",
     },
     {
       id: "faq-irrigation",
-      question: "Solar sulama sistemleri hangi alanlarda kullanılır?",
+      question: "Tarımsal sulama için solar sistem uygun mu?",
       answer:
-        "Özellikle şebeke erişiminin sınırlı olduğu tarımsal parsellerde, pompa başlangıç akımının yüksek olduğu sulama hatlarında ve gün içi üretimle pompa çalışmasını eşleştirmek isteyen işletmelerde tercih edilir.",
+        "Evet; ancak pompanın başlangıç akımı ve günlük sulama saatleri hesaba katılmalıdır. Sadece gündüz sulama yapılıyorsa depolamasız senaryo mümkün olabilir; gece veya düzensiz kullanımda batarya veya şebeke tamamlayıcısı planlanır.",
     },
     {
-      id: "faq-ev",
-      question: "EV şarj çözümleri sunuyor musunuz?",
+      id: "faq-hybrid",
+      question: "Solar + batarya hibrit sistem nasıl planlanır?",
       answer:
-        "Evet; konut ve işletme tipi şarj üniteleri ile ilgili aksesuarları ürün gamımızda bulunduruyoruz. Kurulum tipi ve tesis altyapısına göre uygun güç sınıfını seçmenize yardımcı oluruz.",
+        "Gündüz fazla PV üretiminin bataryaya aktarılması, gece tüketimi veya kesinti anında devreye girmesi için inverterin hem PV hem batarya hatlarını yönetmesi gerekir. Şebeke uyumu, koruma ve mevzuat gereksinimleri proje detayında kontrol edilir.",
     },
     {
-      id: "faq-bulk",
-      question: "Toplu alım veya proje bazlı teklif alabilir miyim?",
+      id: "faq-bms",
+      question: "BMS ve sistem güvenliği neden önemli?",
       answer:
-        "Kurumsal ve proje bazlı ihtiyaçlar için iletişim kanallarımız üzerinden talebinizi paylaşabilirsiniz. Miktar, teslimat bölgesi ve ürün kırılımına göre değerlendirme yapılır.",
+        "Batarya yönetim sistemi hücre voltajlarını ve sıcaklığı izler; aşırı şarj/deşarjı sınırlar. Doğru sigorta, DC kesici ve kablo güzergâhı ile birlikte yangın ve ekipman riskini azaltır. Ucuz ve belgesiz paketler bu katmanlarda eksik kalabilir.",
     },
     {
-      id: "faq-tech",
-      question: "Teknik destek sağlıyor musunuz?",
+      id: "faq-quote",
+      question: "Teklif ve sistem planı nasıl alabilirim?",
       answer:
-        "Ürün seçimi, uyumluluk ve kurulum öncesi teknik sorularınız için destek sunuyoruz. Karmaşık saha müdahaleleri için yetkili servis yönlendirmesi gerekebilir; bu durumda şeffaf biçimde bilgilendiririz.",
+        "İletişim formumuz veya mağaza iletişim kanalı üzerinden yükünüzü, saha bilgisini ve hedefinizi paylaşabilirsiniz. Ön değerlendirme sonrası kapasite aralığı ve uygun ürün ailesi önerilir; gerekirse sahaya özel revizyon yapılır.",
     },
   ],
 } as const;
 
 export const ctaSection = {
   id: "cta",
-  title: "Projeniz için doğru güç mimarisini birlikte netleştirelim",
+  title: "Projeniz için doğru enerji mimarisini birlikte planlayalım.",
   subtitle:
-        "Teklif talebinizi iletin veya mağazamızdan ürün gruplarını inceleyerek ihtiyacınıza uygun bileşenlere hızlıca ulaşın.",
+    "Teklif talebinizi iletin; yük profilinize ve saha koşullarınıza göre sistem çerçevesini ve ürün önerisini netleştirelim.",
   primary: { label: "Teklif Al", href: contactHref },
-  secondary: { label: "İletişime Geç", href: contactHref },
+  secondary: { label: "Süreci İncele", href: "#surec" },
 } as const;
 
 export const footerContent = {
   tagline:
-    "IonBATech; batarya teknolojileri, enerji depolama ve yenilenebilir enerji ekipmanlarında güvenilir tedarik ve teknik yönlendirme sunar.",
+    "IonBATech; enerji depolama, LiFePO₄ batarya, solar sistemler, güç elektroniği ve EV şarjında mühendislik odaklı tasarım, kurulum desteği ve güvenilir tedarik sunar.",
   quickLinks: [
     { label: "Çözümler", href: "#cozumler" },
-    { label: "Kategoriler", href: "#kategoriler" },
-    { label: "Neden Biz", href: "#neden-biz" },
+    { label: "Yaygın hatalar", href: "#yaygin-hatalar" },
+    { label: "Sistem mimarisi", href: "#sistem-mimarisi" },
+    { label: "Senaryolar", href: "#kullanim-senaryolari" },
+    { label: "Ürün grupları", href: "#kategoriler" },
+    { label: "Neden biz", href: "#neden-biz" },
     { label: "SSS", href: "#sss" },
   ],
   categoryLinks: categoriesSection.items.map((c) => ({

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const siteUrl = "https://www.ionbatech.com";
 
 export const siteDescription =
-  "IonBATech; lityum batarya, enerji depolama, güneş enerjisi sistemleri, inverter, tarımsal solar sulama ve elektrikli araç şarj çözümlerinde mühendislik odaklı tedarik ve destek sunar.";
+  "IonBATech; enerji depolama, LiFePO₄ batarya, solar sistemler, inverter ve EV şarjında mühendislik odaklı sistem tasarımı, kurulum desteği ve güvenilir ürün tedariği sunar. Kayseri merkezli; Türkiye geneli.";
 
 export const siteKeywords = [
   "batarya teknolojileri",
@@ -38,13 +38,13 @@ export const defaultMetadata: Metadata = {
     title:
       "IonBATech | Batarya ve Enerji Depolama Çözümleri",
     description:
-      "Batarya teknolojileri, enerji depolama, güneş enerjisi, inverter ve EV şarj ürünlerinde güvenilir çözüm ortağınız.",
+      "Enerji depolama ve solar sistemlerde kapasite planlama, doğru inverter–batarya eşleştirmesi ve teknik destek ile çalışan mühendislik yaklaşımı.",
   },
   twitter: {
     card: "summary_large_image",
     title: "IonBATech | Batarya ve Enerji Çözümleri",
     description:
-      "Lityum batarya, enerji depolama, solar ve saha uygulamaları için teknik odaklı ürün ve destek.",
+      "LiFePO₄, depolama, solar ve güç elektroniğinde sistem tasarımı ve satış sonrası teknik destek.",
   },
   robots: {
     index: true,

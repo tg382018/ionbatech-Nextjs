@@ -7,11 +7,11 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import {
-  BatteryCharging,
-  CarFront,
-  Sprout,
-  SunMedium,
-  Warehouse,
+  BadgeCheck,
+  Building2,
+  Cpu,
+  Headset,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -22,11 +22,11 @@ import { cn } from "@/lib/utils";
 
 const stripIcons: Record<(typeof brandTrustStripItems)[number]["key"], LucideIcon> =
   {
-    battery: BatteryCharging,
-    storage: Warehouse,
-    solar: SunMedium,
-    agri: Sprout,
-    ev: CarFront,
+    engineering: Cpu,
+    safety: ShieldCheck,
+    selection: BadgeCheck,
+    support: Headset,
+    hq: Building2,
   };
 
 const PX_PER_SEC = 52;
@@ -195,7 +195,7 @@ export function TrustMarquee() {
   return (
     <div
       role="region"
-      aria-label={`Kaydırılan uzmanlık alanları: ${a11ySummary}`}
+      aria-label={`Güven ve yaklaşım: ${a11ySummary}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}

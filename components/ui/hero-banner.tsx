@@ -28,7 +28,7 @@ function isExternalHref(href: string) {
   );
 }
 
-function LeadCta({ href, label }: { href: string; label: string }) {
+function HeroPrimaryCta({ href, label }: { href: string; label: string }) {
   const external = isExternalHref(href);
   const classes = cn(
     "group inline-flex max-w-full items-center gap-3 rounded-full bg-[#0f3d33] py-2.5 pl-7 pr-2.5 text-left text-sm font-semibold text-white shadow-[0_12px_40px_-8px_rgba(15,61,51,0.55)] transition-[transform,box-shadow,background-color] duration-300",
@@ -62,7 +62,40 @@ function LeadCta({ href, label }: { href: string; label: string }) {
     );
   }
 
-  return <Link href={href} className={classes}>{inner}</Link>;
+  return (
+    <Link href={href} className={classes}>
+      {inner}
+    </Link>
+  );
+}
+
+function HeroSecondaryCta({ href, label }: { href: string; label: string }) {
+  const external = isExternalHref(href);
+  const classes = cn(
+    "inline-flex max-w-full items-center justify-center rounded-full border-2 border-white/55 bg-white/[0.08] px-7 py-2.5 text-center text-sm font-semibold text-white backdrop-blur-sm transition-[transform,border-color,background-color] duration-300",
+    "hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/[0.14]",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a2520]",
+    "sm:px-9 sm:py-3 sm:text-base"
+  );
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        className={classes}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={classes}>
+      {label}
+    </Link>
+  );
 }
 
 export function HeroBanner() {
@@ -189,10 +222,17 @@ export function HeroBanner() {
             {heroContent.subheading}
           </motion.p>
 
-          <motion.div className="mt-8 sm:mt-10" variants={lineVariants}>
-            <LeadCta
-              href={heroContent.leadCta.href}
-              label={heroContent.leadCta.label}
+          <motion.div
+            className="mt-8 flex max-w-lg flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center"
+            variants={lineVariants}
+          >
+            <HeroPrimaryCta
+              href={heroContent.primaryCta.href}
+              label={heroContent.primaryCta.label}
+            />
+            <HeroSecondaryCta
+              href={heroContent.secondaryCta.href}
+              label={heroContent.secondaryCta.label}
             />
           </motion.div>
 
@@ -200,17 +240,6 @@ export function HeroBanner() {
             className="mt-5 text-sm text-white/65 sm:mt-6"
             variants={lineVariants}
           >
-            <a
-              href={heroContent.secondaryCta.href}
-              className="underline decoration-white/30 underline-offset-[5px] transition-colors hover:text-white hover:decoration-white/60"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {heroContent.secondaryCta.label}
-            </a>
-            <span className="mx-2 text-white/35" aria-hidden>
-              ·
-            </span>
             <Link
               href={heroContent.tertiaryCta.href}
               className="underline decoration-white/30 underline-offset-[5px] transition-colors hover:text-white hover:decoration-white/60"

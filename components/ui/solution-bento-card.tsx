@@ -8,6 +8,7 @@ type SolutionBentoCardProps = {
   icon: LucideIcon;
   title: string;
   description: string;
+  benefits?: readonly string[];
   href: string;
   imageSrc: string;
   imageAlt: string;
@@ -19,6 +20,7 @@ export function SolutionBentoCard({
   icon: Icon,
   title,
   description,
+  benefits,
   href,
   imageSrc,
   imageAlt,
@@ -34,7 +36,7 @@ export function SolutionBentoCard({
       <a
         href={href}
         className={cn(
-          "group relative isolate block h-full min-h-[280px] overflow-hidden rounded-3xl border border-white/10 shadow-lg ring-1 ring-foreground/5 transition-all duration-500 lg:min-h-0",
+          "group relative isolate block h-full min-h-[220px] overflow-hidden rounded-2xl border border-white/10 shadow-lg ring-1 ring-foreground/5 transition-all duration-500 lg:min-h-0",
           "hover:shadow-2xl hover:shadow-primary/20 hover:ring-primary/20",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           gridClassName
@@ -60,27 +62,34 @@ export function SolutionBentoCard({
           aria-hidden
         />
 
-        <div className="relative z-[1] flex h-full min-h-[280px] flex-col justify-end gap-4 p-6 sm:p-8 lg:min-h-0">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex size-14 items-center justify-center rounded-2xl bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-              <Icon className="size-7" aria-hidden />
+        <div className="relative z-[1] flex h-full min-h-[220px] flex-col justify-end gap-3 p-5 sm:p-6 lg:min-h-0">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex size-11 items-center justify-center rounded-xl bg-primary/90 text-primary-foreground shadow-md shadow-primary/25 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2">
+              <Icon className="size-5" aria-hidden />
             </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+            <div className="flex size-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-105">
               <ArrowUpRight
-                className="size-5 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="size-4 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 aria-hidden
               />
             </div>
           </div>
           <div className="space-y-2">
-            <h3 className="font-heading text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h3 className="font-heading text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
               {title}
             </h3>
-            <p className="max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
+            <p className="max-w-xl text-xs leading-relaxed text-white/75 sm:text-sm">
               {description}
             </p>
+            {benefits && benefits.length > 0 ? (
+              <ul className="max-w-xl list-inside list-disc space-y-1 pl-0.5 text-[0.6875rem] leading-snug text-white/78 marker:text-emerald-300/90 sm:text-xs">
+                {benefits.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            ) : null}
           </div>
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-1">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold text-white/90 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-1 sm:text-sm">
             <span className="h-px w-6 bg-primary transition-all duration-500 group-hover:w-10" />
             İncele
           </span>
@@ -93,15 +102,15 @@ export function SolutionBentoCard({
     <a
       href={href}
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.03] transition-all duration-500",
-        "hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:ring-primary/10",
+        "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.03] transition-all duration-500",
+        "hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 hover:ring-primary/10",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         gridClassName
       )}
       aria-label={`${title} — İncele`}
       {...linkProps}
     >
-      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden sm:aspect-[5/3]">
+      <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden sm:aspect-[16/9]">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -114,22 +123,29 @@ export function SolutionBentoCard({
           aria-hidden
         />
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
+      <div className="flex flex-1 flex-col gap-2 p-4 sm:p-4">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-md group-hover:shadow-primary/25 group-hover:scale-110">
-            <Icon className="size-[22px]" aria-hidden />
+          <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-md group-hover:shadow-primary/25 group-hover:scale-105">
+            <Icon className="size-[18px] sm:size-5" aria-hidden />
           </div>
           <ArrowUpRight
-            className="size-4 shrink-0 text-muted-foreground/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+            className="size-3.5 shrink-0 text-muted-foreground/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary sm:size-4"
             aria-hidden
           />
         </div>
-        <h3 className="font-heading text-base font-semibold tracking-tight text-foreground sm:text-lg">
+        <h3 className="font-heading text-sm font-semibold tracking-tight text-foreground sm:text-base">
           {title}
         </h3>
-        <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+        <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
           {description}
         </p>
+        {benefits && benefits.length > 0 ? (
+          <ul className="mt-1 list-inside list-disc space-y-0.5 text-[0.6875rem] leading-snug text-muted-foreground marker:text-primary sm:text-xs">
+            {benefits.map((b) => (
+              <li key={b}>{b}</li>
+            ))}
+          </ul>
+        ) : null}
         <div className="flex items-center gap-2 text-xs font-semibold text-primary opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-1">
           <span className="h-px w-4 bg-primary transition-all duration-500 group-hover:w-8" />
           İncele

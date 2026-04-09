@@ -31,13 +31,13 @@ export function CtaSection() {
               <CtaButton
                 href={ctaSection.primary.href}
                 external
-                className="w-full min-w-[200px] border-0 bg-white font-semibold text-primary shadow-md hover:bg-white/95 sm:w-auto"
+                className="w-full min-w-[200px] border-0 bg-white font-semibold text-primary shadow-md transition-colors hover:bg-primary hover:text-primary-foreground sm:w-auto"
               >
                 {ctaSection.primary.label}
               </CtaButton>
               <CtaButton
                 href={ctaSection.secondary.href}
-                external
+                external={ctaSection.secondary.href.startsWith("http")}
                 variant="outline"
                 className="w-full border-2 border-white/80 bg-transparent font-semibold text-white hover:bg-white/15 hover:text-white sm:w-auto"
               >

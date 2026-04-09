@@ -11,6 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 import type { ProblemIconKey } from "@/lib/constants";
 import { problemSection } from "@/lib/constants";
@@ -90,10 +91,13 @@ export function ProblemSection() {
         className="pointer-events-none absolute inset-0 bg-[#f8fafc] dark:bg-background"
         aria-hidden
       />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(16,185,129,0.07)_0%,transparent_42%),radial-gradient(circle_at_90%_80%,rgba(16,185,129,0.07)_0%,transparent_42%)]"
+      <Parallax
+        speed={-6}
+        className="pointer-events-none absolute inset-0"
         aria-hidden
-      />
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(16,185,129,0.07)_0%,transparent_42%),radial-gradient(circle_at_90%_80%,rgba(16,185,129,0.07)_0%,transparent_42%)]" />
+      </Parallax>
 
       <Container className="relative">
         <motion.header

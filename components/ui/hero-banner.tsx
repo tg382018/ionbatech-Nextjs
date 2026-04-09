@@ -4,6 +4,7 @@ import { ArrowRight, Award, Cpu, Headset, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 import { useEffect, useRef } from "react";
 
 import {
@@ -170,15 +171,27 @@ export function HeroBanner() {
             </video>
           </div>
         )}
-        <div className="absolute inset-0 bg-stone-900/45" aria-hidden />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-stone-950/88 via-stone-950/50 to-stone-900/35"
+        <Parallax
+          speed={-6}
+          className="pointer-events-none absolute inset-0"
           aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-stone-950/65 via-transparent to-stone-950/25"
+        >
+          <div className="absolute inset-0 bg-stone-900/45" />
+        </Parallax>
+        <Parallax
+          speed={5}
+          className="pointer-events-none absolute inset-0"
           aria-hidden
-        />
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/88 via-stone-950/50 to-stone-900/35" />
+        </Parallax>
+        <Parallax
+          speed={-4}
+          className="pointer-events-none absolute inset-0"
+          aria-hidden
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/65 via-transparent to-stone-950/25" />
+        </Parallax>
       </div>
 
       <motion.div

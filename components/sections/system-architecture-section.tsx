@@ -1,6 +1,7 @@
 import { systemArchitectureSection } from "@/lib/constants";
 
 import { Container } from "../layout/container";
+import { SystemArchitectureParallaxBg } from "./system-architecture-parallax-bg";
 import { AnimatedReveal } from "../ui/animated-reveal";
 import { SystemEnergyHubDiagram } from "../ui/system-energy-hub-diagram";
 
@@ -13,14 +14,7 @@ export function SystemArchitectureSection() {
       className="relative scroll-mt-24 overflow-hidden border-t border-border py-14 sm:py-20"
       aria-labelledby="architecture-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50/90 via-background to-muted/40 dark:from-muted/20 dark:via-background dark:to-muted/30"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.96_0.02_200_/_0.5),transparent_55%)]"
-        aria-hidden
-      />
+      <SystemArchitectureParallaxBg />
 
       <Container className="relative">
         <div className="mx-auto max-w-6xl">

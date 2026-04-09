@@ -9,6 +9,7 @@ import {
   Zap,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 import type { SolutionIconKey } from "@/lib/constants";
 import { solutionsSection } from "@/lib/constants";
@@ -84,8 +85,18 @@ export function SolutionsSection() {
     >
       {/* Ambient gradient orbs */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="animate-float-slow absolute left-1/4 top-0 h-[500px] w-[600px] -translate-x-1/2 rounded-full bg-primary/[0.06] blur-[120px]" />
-        <div className="animate-float-slower absolute bottom-0 right-1/4 h-[400px] w-[500px] translate-x-1/2 rounded-full bg-primary/[0.04] blur-[100px]" />
+        <Parallax
+          speed={7}
+          className="absolute left-1/4 top-0 h-[500px] w-[600px] -translate-x-1/2"
+        >
+          <div className="animate-float-slow h-full w-full rounded-full bg-primary/[0.06] blur-[120px]" />
+        </Parallax>
+        <Parallax
+          speed={-5}
+          className="absolute bottom-0 right-1/4 h-[400px] w-[500px] translate-x-1/2"
+        >
+          <div className="animate-float-slower h-full w-full rounded-full bg-primary/[0.04] blur-[100px]" />
+        </Parallax>
       </div>
 
       <Container className="relative">

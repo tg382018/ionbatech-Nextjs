@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 
+import { ParallaxRoot } from "@/components/providers/parallax-root";
 import { SiteJsonLd } from "@/components/seo/site-json-ld";
 import { defaultMetadata } from "@/lib/seo";
 
@@ -36,7 +37,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <SiteJsonLd />
-        {children}
+        <ParallaxRoot>{children}</ParallaxRoot>
       </body>
     </html>
   );

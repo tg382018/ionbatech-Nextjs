@@ -11,9 +11,6 @@ export const storeBaseUrl = "https://market.ionbatech.com";
 export const navLinks = [
   { label: "Anasayfa", href: "#anasayfa" },
   { label: "Çözümler", href: "#cozumler" },
-  { label: "Riskler", href: "#yaygin-hatalar" },
-  { label: "Mimari", href: "#sistem-mimarisi" },
-  { label: "Senaryolar", href: "#kullanim-senaryolari" },
   { label: "Ürünler", href: storeBaseUrl },
   { label: "Neden Biz", href: "#neden-biz" },
   { label: "SSS", href: "#sss" },
@@ -190,42 +187,61 @@ export const solutionsSection = {
   ],
 } as const;
 
+export type ProblemIconKey =
+  | "battery-warning"
+  | "zap-off"
+  | "sun"
+  | "shield-alert"
+  | "settings-2";
+
 export const problemSection = {
   id: "yaygin-hatalar",
+  badge: "Teknik risk analizi",
   title: "Enerji sistemlerinde sık görülen teknik hatalar",
   subtitle:
-    "Katalogdan parça seçmek ile mühendislik tasarımı aynı şey değildir. Yanlış boyutlandırma ve uyumsuz bileşenler kısa ömür, kesinti ve güvenlik riskine yol açar.",
-  intro:
-    "Doğru mimari; yük listesi, çalışma süresi, şarj kaynakları ve koruma senaryolarının birlikte ele alınmasıyla oluşur. Aşağıdaki hataların çoğu, analiz ve entegrasyon adımının atlanmasından kaynaklanır.",
+    "Katalogdan parça seçmek ile mühendislik tasarımı aynı şey değildir. Yanlış boyutlandırma kısa ömür, kesinti ve güvenlik riskine yol açar.",
+  heroTitle: "Doğru mimari nasıl oluşur?",
+  heroBody:
+    "Yük listesi, çalışma süresi, şarj kaynakları ve koruma senaryolarının birlikte ele alınmasıyla oluşur. Analiz adımı atlandığında sistem hataları kaçınılmazdır.",
+  heroTags: ["BMS koruma", "Kapasite planlama", "Uyumluluk"] as const,
   problems: [
     {
+      key: "battery-warning" as const,
       title: "Yanlış batarya kapasitesi",
       description:
-        "Sadece kWh rakamına odaklanmak, tepe güç, derin deşarj ve sıcaklık marjını göz ardı etmek erken kapasite düşüşüne ve kesintilere neden olur.",
+        "Sadece kWh rakamına odaklanmak, tepe güç ve sıcaklık marjını göz ardı etmek erken kapasite düşüşüne neden olur.",
     },
     {
+      key: "zap-off" as const,
       title: "İnverter uyumsuzluğu",
       description:
-        "Batarya voltajı, şarj profili ve haberleşme (BMS / protokol) inverter ile örtüşmediğinde sistem ya verimli çalışmaz ya da koruma moduna düşer.",
+        "Şarj profili ve haberleşme protokolü inverter ile örtüşmediğinde sistem verimli çalışmaz veya korumaya geçer.",
     },
     {
+      key: "sun" as const,
       title: "Panel ve depolama dengesizliği",
       description:
-        "Aşırı veya yetersiz PV gücü, bataryanın şebeke dışı senaryolarda ya şişmesine ya da dolmadan tükenmesine yol açar.",
+        "Aşırı veya yetersiz PV gücü, bataryanın şebeke dışı senaryolarda dolmadan tükenmesine yol açar.",
     },
     {
-      title: "Ucuz ama güvensiz ekipmanlar",
+      key: "shield-alert" as const,
+      title: "Ucuz ve güvensiz ekipman",
       description:
-        "Belirsiz BMS, yetersiz koruma sınıfları ve belgesiz ürünler yangın ve ekipman arızası riskini artırır; uzun vadede maliyeti yükseltir.",
+        "Belirsiz BMS ve belgesiz ürünler yangın riskini artırır; uzun vadede maliyeti iki katına çıkarır.",
     },
     {
+      key: "settings-2" as const,
       title: "Yanlış sistem tasarımı",
       description:
-        "Kablo kesitleri, sigorta-kesen seçimi, topraklama ve AC/DC ayrımı gibi detaylar atlandığında kurulum “çalışıyor” görünse bile sürdürülebilir değildir.",
+        "Kablo kesitleri, topraklama ve AC/DC ayrımı gibi detaylar atlandığında kurulum sürdürülebilir değildir.",
+      aside:
+        "“Çalışıyor” görünmesi, sistemin güvenli olduğu anlamına gelmez.",
     },
   ],
-  closing:
-    "IonBATech projeleri bu yüzden ürün listesinden önce enerji ihtiyaç analizi ve sistem mimarisi ile başlatır; bileşenler bu çerçeveye oturtulur.",
+  ctaBrand: "IonBATech",
+  ctaBeforeEmphasis: " projeleri bu yüzden ürün listesinden önce ",
+  ctaEmphasis: "enerji ihtiyaç analizi",
+  ctaAfterEmphasis: " ve sistem mimarisi ile başlatılır.",
 } as const;
 
 export const systemArchitectureSection = {

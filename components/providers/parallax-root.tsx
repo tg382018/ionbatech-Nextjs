@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { useSyncExternalStore, type ReactNode } from "react";
 
@@ -19,13 +20,17 @@ function getServerReducedMotion() {
 }
 
 export function ParallaxRoot({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getClientReducedMotion,
     getServerReducedMotion
   );
 
+  /** Rota değişince yeniden mount: scroll-parallax önceki sayfanın kaydırma/transform durumunu taşımayı bırakır (blog → anasayfa boş ekran düzeltmesi). */
   return (
-    <ParallaxProvider isDisabled={reducedMotion}>{children}</ParallaxProvider>
+    <ParallaxProvider key={pathname} isDisabled={reducedMotion}>
+      {children}
+    </ParallaxProvider>
   );
 }

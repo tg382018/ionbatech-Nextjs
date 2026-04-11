@@ -36,7 +36,7 @@ export default function BlogPage() {
 
       <Container className="py-10 sm:py-14">
         <ul className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
-          {blogPosts.map((post) => (
+          {blogPosts.map((post, index) => (
             <li key={post.slug}>
               <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border/80 bg-card shadow-sm ring-1 ring-foreground/[0.04] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md">
                 <Link
@@ -48,6 +48,8 @@ export default function BlogPage() {
                     src={post.coverImage.src}
                     alt={post.coverImage.alt}
                     fill
+                    priority={index === 0}
+                    loading={index === 0 ? "eager" : undefined}
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   />

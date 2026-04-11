@@ -4,6 +4,7 @@ import { CategoriesSection } from "@/components/sections/categories-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { HeroSection } from "@/components/sections/hero-section";
+import { PartnersSection } from "@/components/sections/partners-section";
 import { ProblemSection } from "@/components/sections/problem-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { SolutionsSection } from "@/components/sections/solutions-section";
@@ -19,6 +20,7 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
+        <PartnersSection />
         <TrustStrip />
         <ProblemSection />
         <SolutionsSection />

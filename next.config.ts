@@ -3,12 +3,13 @@ import type { NextConfig } from "next";
 const remotePatterns: NonNullable<
   NonNullable<NextConfig["images"]>["remotePatterns"]
 > = [
-  {
-    protocol: "https",
-    hostname: "images.unsplash.com",
-    pathname: "/**",
-  },
-];
+    {
+      protocol: "https",
+      hostname: "images.unsplash.com",
+      pathname: "/**",
+      //
+    },
+  ];
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 if (supabaseUrl) {

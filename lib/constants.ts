@@ -75,7 +75,7 @@ export const brandTrustStripItems = [
   },
 ] as const;
 
-/** Ana sayfa — iş ortakları kayan şerit (görseller placeholder / Unsplash). */
+/** Ana sayfa — iş ortakları kayan şerit (logo görselleri `public/` altında). */
 export const partnersSection = {
   id: "ortaklar",
   badge: "İş birliğimiz",
@@ -84,60 +84,22 @@ export const partnersSection = {
     "İş birliği yaptığımız firmalar ve güvenilir çözüm ortaklarımızla birlikte büyüyoruz.",
   partners: [
     {
-      key: "p1" as const,
-      name: "Volt Enerji",
-      imageSrc:
-        "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — güneş enerjisi kurulumu",
+      key: "cw-enerji" as const,
+      name: "CW Enerji",
+      imageSrc: "/cw-enerji.webp",
+      imageAlt: "CW Enerji logosu",
     },
     {
-      key: "p2" as const,
-      name: "Solar Pro",
-      imageSrc:
-        "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — enerji depolama ekipmanı",
+      key: "solinved" as const,
+      name: "Solinved",
+      imageSrc: "/solinved.svg",
+      imageAlt: "Solinved logosu",
     },
     {
-      key: "p3" as const,
-      name: "Akıllı Şebeke",
-      imageSrc:
-        "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — güneş panelleri",
-    },
-    {
-      key: "p4" as const,
-      name: "GreenPower",
-      imageSrc:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — güç elektroniği",
-    },
-    {
-      key: "p5" as const,
-      name: "Endüstri Teknik",
-      imageSrc:
-        "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — yenilenebilir enerji altyapısı",
-    },
-    {
-      key: "p6" as const,
-      name: "Kurumsal Çözüm",
-      imageSrc:
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — tarımsal enerji",
-    },
-    {
-      key: "p7" as const,
-      name: "Enerji Hatları",
-      imageSrc:
-        "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — şarj altyapısı",
-    },
-    {
-      key: "p8" as const,
-      name: "Saha Mühendislik",
-      imageSrc:
-        "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=400&q=80",
-      imageAlt: "İş ortağı — saha kurulum",
+      key: "tommatech" as const,
+      name: "Tommatech",
+      imageSrc: "/tommatech.webp",
+      imageAlt: "Tommatech logosu",
     },
   ],
 } as const;

@@ -24,10 +24,10 @@ export default function Home() {
         <TrustStrip />
         <ProblemSection />
         <SolutionsSection />
+        <StatsSection />
         <SystemArchitectureSection />
         <UseCasesSection />
         <WhyUsSection />
-        <StatsSection />
         <ProcessSection />
         <CategoriesSection />
         <FaqSection />

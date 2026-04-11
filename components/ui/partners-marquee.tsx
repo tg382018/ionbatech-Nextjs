@@ -50,7 +50,7 @@ function PartnerCard({
           src={imageSrc}
           alt=""
           fill
-          className="object-cover transition-[filter,transform] duration-500 group-hover:brightness-105"
+          className="object-contain p-6 transition-[filter,transform] duration-500 group-hover:brightness-105"
           sizes="220px"
         />
       </div>

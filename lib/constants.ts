@@ -9,12 +9,13 @@ export const logoAlt = "IonBATech";
 export const storeBaseUrl = "https://market.ionbatech.com";
 
 export const navLinks = [
-  { label: "Anasayfa", href: "#anasayfa" },
-  { label: "Çözümler", href: "#cozumler" },
+  { label: "Anasayfa", href: "/#anasayfa" },
+  { label: "Çözümler", href: "/#cozumler" },
   { label: "Ürünler", href: storeBaseUrl },
-  { label: "Neden Biz", href: "#neden-biz" },
-  { label: "SSS", href: "#sss" },
-  { label: "İletişim", href: "#iletisim" },
+  { label: "Neden Biz", href: "/#neden-biz" },
+  { label: "Blog", href: "/blog" },
+  { label: "SSS", href: "/#sss" },
+  { label: "İletişim", href: "/#iletisim" },
 ] as const;
 
 export const contactHref = `${storeBaseUrl}/iletisim`;
@@ -26,8 +27,8 @@ export const heroContent = {
   subheading:
     "IonBATech yalnızca ürün satmaz: yük profilinize göre batarya ve inverter eşleştirmesi, koruma katmanları ve uzun vadeli çalışırılırlık için sistem tasarımı ve danışmanlık sunar.",
   primaryCta: { label: "Teklif Al", href: contactHref },
-  secondaryCta: { label: "Sistem Planınızı Görün", href: "#surec" },
-  tertiaryCta: { label: "Çözümlerimiz", href: "#cozumler" },
+  secondaryCta: { label: "Sistem Planınızı Görün", href: "/#surec" },
+  tertiaryCta: { label: "Çözümlerimiz", href: "/#cozumler" },
 } as const;
 
 /** Full-bleed hero: video arka plan + poster / hareket azaltma yedeği. */
@@ -440,33 +441,25 @@ export const processSection = {
 
 export const statsSection = {
   id: "rakamlar",
-  title: "Ölçek ve Yaklaşım",
-  subtitle:
-    "Abartılı vaatler yerine, operasyonunuzu planlarken işinize yarayacak çerçeve veriler.",
-  metrics: [
+  stats: [
     {
-      label: "Ürün Grubu",
-      value: "6+ ana kategori",
-      hint: "Bataryadan EV şarja geniş hat",
-      tone: "emerald" as const,
+      key: "systems" as const,
+      value: 500,
+      label: "Kurulu Sistem",
+      format: "plus" as const,
     },
     {
-      label: "Çözüm Alanı",
-      value: "Konut · Ticari · Tarım",
-      hint: "Farklı saha senaryoları",
-      tone: "ocean" as const,
+      key: "power" as const,
+      value: 50,
+      label: "Toplam Kurulu Güç",
+      format: "unit" as const,
+      unit: "MW",
     },
     {
-      label: "Teknik Destek",
-      value: "Satış öncesi / sonrası",
-      hint: "Sorunuzu doğru kanala yönlendirme",
-      tone: "amber" as const,
-    },
-    {
-      label: "Kurumsal Yaklaşım",
-      value: "Şeffaf süreç",
-      hint: "Teklif ve tedarik netliği",
-      tone: "violet" as const,
+      key: "provinces" as const,
+      value: 81,
+      label: "Hizmet Verilen İl",
+      format: "plain" as const,
     },
   ],
 } as const;
@@ -534,20 +527,20 @@ export const ctaSection = {
   subtitle:
     "Teklif talebinizi iletin; yük profilinize ve saha koşullarınıza göre sistem çerçevesini ve ürün önerisini netleştirelim.",
   primary: { label: "Teklif Al", href: contactHref },
-  secondary: { label: "Süreci İncele", href: "#surec" },
+  secondary: { label: "Süreci İncele", href: "/#surec" },
 } as const;
 
 export const footerContent = {
   tagline:
     "IonBATech; enerji depolama, LiFePO₄ batarya, solar sistemler, güç elektroniği ve EV şarjında mühendislik odaklı tasarım, kurulum desteği ve güvenilir tedarik sunar.",
   quickLinks: [
-    { label: "Çözümler", href: "#cozumler" },
-    { label: "Yaygın hatalar", href: "#yaygin-hatalar" },
-    { label: "Sistem mimarisi", href: "#sistem-mimarisi" },
-    { label: "Senaryolar", href: "#kullanim-senaryolari" },
-    { label: "Ürün grupları", href: "#kategoriler" },
-    { label: "Neden biz", href: "#neden-biz" },
-    { label: "SSS", href: "#sss" },
+    { label: "Çözümler", href: "/#cozumler" },
+    { label: "Yaygın hatalar", href: "/#yaygin-hatalar" },
+    { label: "Sistem mimarisi", href: "/#sistem-mimarisi" },
+    { label: "Senaryolar", href: "/#kullanim-senaryolari" },
+    { label: "Ürün grupları", href: "/#kategoriler" },
+    { label: "Neden biz", href: "/#neden-biz" },
+    { label: "SSS", href: "/#sss" },
   ],
   categoryLinks: categoriesSection.items.map((c) => ({
     label: c.title,

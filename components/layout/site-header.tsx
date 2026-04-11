@@ -54,6 +54,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [pastBanner, setPastBanner] = useState(false);
   const isHome = pathname === "/";
+  const isBlog = pathname?.startsWith("/blog") ?? false;
   /** Video banner üzerindeyken beyaz nav; aşağı kayınca (banner bitti) koyu tipografi */
   const lightOnVideo = isHome && !pastBanner;
   /** Ana sayfada banner geçilince yüzen kapsül yukarı çöküp ince tam genişlik şeridine döner */
@@ -101,7 +102,10 @@ export function SiteHeader() {
     isHome &&
       pastBanner &&
       "border-stone-300/90 bg-white text-[#126458] hover:bg-stone-50",
+    isBlog &&
+      "border-stone-300/90 bg-white text-[#126458] hover:bg-stone-50",
     !isHome &&
+      !isBlog &&
       "border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
   );
 
@@ -115,15 +119,19 @@ export function SiteHeader() {
     "whitespace-nowrap font-medium transition-colors duration-300",
     collapsed ? "text-[14px] lg:text-[15px]" : "text-[15px]",
     lightOnVideo && "text-white hover:text-white/85",
-    isHome && pastBanner && "text-stone-900 hover:text-[#126458]",
-    !isHome && "text-white hover:text-white/85"
+    (isHome && pastBanner) || isBlog
+      ? "text-stone-900 hover:text-[#126458]"
+      : null,
+    !isHome && !isBlog && "text-white hover:text-white/85"
   );
 
   const menuBtnClass = cn(
     "shrink-0 transition-colors duration-300 md:hidden",
     lightOnVideo && "text-white hover:bg-white/10",
-    isHome && pastBanner && "text-stone-900 hover:bg-stone-200/60",
-    !isHome && "text-white hover:bg-white/10"
+    (isHome && pastBanner) || isBlog
+      ? "text-stone-900 hover:bg-stone-200/60"
+      : null,
+    !isHome && !isBlog && "text-white hover:bg-white/10"
   );
 
   return (
@@ -143,7 +151,10 @@ export function SiteHeader() {
             "max-w-[1300px] rounded-2xl border border-white/20 bg-white/20 px-4 py-2.5 shadow-lg sm:px-8 sm:py-3",
           collapsed &&
             "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/95 px-4 py-3 shadow-md sm:px-6 sm:py-3.5",
+          isBlog &&
+            "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-stone-50/95 px-4 py-3.5 shadow-sm sm:px-6 sm:py-3.5",
           !isHome &&
+            !isBlog &&
             "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-white/15 bg-slate-950/80 px-4 py-3.5 shadow-lg sm:px-6 sm:py-4"
         )}
         aria-label="Ana navigasyon"
@@ -170,7 +181,7 @@ export function SiteHeader() {
               className={cn(
                 "object-contain object-left transition-[filter] duration-300",
                 lightOnVideo && "brightness-0 invert",
-                !isHome && "brightness-0 invert",
+                !isHome && !isBlog && "brightness-0 invert",
               )}
               sizes="(max-width: 640px) 152px, 176px"
               priority
@@ -233,10 +244,13 @@ export function SiteHeader() {
             "p-4 shadow-md backdrop-blur-md transition-[margin,border-radius] duration-300 ease-out md:hidden",
             collapsed &&
               "mt-0 rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/98",
+            isBlog &&
+              "mt-0 rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white shadow-md",
             isHome &&
               lightOnVideo &&
               "mt-2 mx-0 rounded-2xl border border-white/20 bg-slate-950/90",
             !isHome &&
+              !isBlog &&
               "mt-2 mx-4 rounded-2xl border border-white/20 bg-slate-950/90"
           )}
         >
@@ -247,7 +261,7 @@ export function SiteHeader() {
                   href={link.href}
                   className={cn(
                     "block rounded-xl py-2.5 text-base font-medium transition-colors duration-300",
-                    isHome && pastBanner
+                    (isHome && pastBanner) || isBlog
                       ? "text-stone-900 hover:text-[#126458]"
                       : "text-white hover:text-white/85"
                   )}
@@ -261,7 +275,9 @@ export function SiteHeader() {
           <div
             className={cn(
               "mt-4 space-y-3 border-t pt-4",
-              isHome && pastBanner ? "border-stone-200" : "border-white/15"
+              isHome && pastBanner || isBlog
+                ? "border-stone-200"
+                : "border-white/15"
             )}
           >
             <NavAnchor

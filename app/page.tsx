@@ -7,6 +7,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { ProblemSection } from "@/components/sections/problem-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { SolutionsSection } from "@/components/sections/solutions-section";
+import { StatsSection } from "@/components/sections/stats-section";
 import { SystemArchitectureSection } from "@/components/sections/system-architecture-section";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { UseCasesSection } from "@/components/sections/use-cases-section";
@@ -24,6 +25,7 @@ export default function Home() {
         <SystemArchitectureSection />
         <UseCasesSection />
         <WhyUsSection />
+        <StatsSection />
         <ProcessSection />
         <CategoriesSection />
         <FaqSection />

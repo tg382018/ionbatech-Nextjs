@@ -316,6 +316,13 @@ export const systemArchitectureSection = {
   ] as const,
 } as const;
 
+export type UseCaseIconKey =
+  | "cottage"
+  | "farm"
+  | "commercial"
+  | "backup"
+  | "hybrid";
+
 export const useCasesSection = {
   id: "kullanim-senaryolari",
   title: "Kullanım senaryoları",
@@ -323,26 +330,31 @@ export const useCasesSection = {
     "Bağ evinden çiftliğe, ticari çatıdan kesintiye dayanıklı yedek güce kadar gerçek saha örnekleri.",
   items: [
     {
+      iconKey: "cottage" as const,
       title: "Bağ evi enerji sistemi",
       description:
         "Sınırlı şebeke veya tam ada kullanımında gün içi tüketim ve gece yedek süresi için solar + LiFePO₄ ve doğru inverter gücü.",
     },
     {
+      iconKey: "farm" as const,
       title: "Çiftlik ve tarımsal sulama",
       description:
         "Pompa motorunun başlangıç akımı ve sulama pencereleri dikkate alınarak solar ve gerekirse tamamlayıcı depolama tasarımı.",
     },
     {
+      iconKey: "commercial" as const,
       title: "Ticari bina enerji depolama",
       description:
         "Tepe yükleri yumuşatma, kesinti anında kritik yükleri ayırma veya üretim-tüketim dengesini iyileştirme odaklı ESS.",
     },
     {
+      iconKey: "backup" as const,
       title: "Elektrik kesintisine karşı yedek güç",
       description:
         "Şebeke düştüğünde otomatik devreye giren yedek mimarisi; yük önceliklendirme ve batarya sağlık izleme ile planlanır.",
     },
     {
+      iconKey: "hybrid" as const,
       title: "Solar + batarya hibrit sistemler",
       description:
         "Gündüz üretimi depolayıp gece veya yüksek tarifede kullanma; şebeke ile güvenli paralel çalışma için doğru inverter ve koruma.",

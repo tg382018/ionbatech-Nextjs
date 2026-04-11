@@ -199,8 +199,8 @@ export function SiteHeader() {
             className={cn(
               "relative flex shrink-0 items-center",
               collapsed
-                ? "h-10 w-[9.25rem] sm:h-11 sm:w-[10.5rem]"
-                : "h-10 w-[9.5rem] sm:h-11 sm:w-[11rem]"
+                ? "h-11 w-[10.5rem] sm:h-12 sm:w-[12rem]"
+                : "h-11 w-[11rem] sm:h-12 sm:w-[12.5rem]"
             )}
           >
             <Image

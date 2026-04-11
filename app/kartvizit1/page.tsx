@@ -205,7 +205,7 @@ export default function Kartvizit1() {
 
             <div className="header-section">
               <div className="logo-container">
-                <img alt="ionBATech Logo" className="main-logo" src="https://i.hizliresim.com/9gpxile.png" />
+                <img alt="ionBATech Logo" className="main-logo" src="/logo_ionbatech.svg" />
               </div>
               <div className="company-slogan">IONBATECH</div>
               <div className="sub-slogan">Güvenle depola, özgürce harca.</div>

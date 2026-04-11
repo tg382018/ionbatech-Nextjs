@@ -2,8 +2,8 @@ import { siteUrl } from "@/lib/seo";
 
 export const brandName = "IonBATech";
 
-/** Served from `public/logo.webp` */
-export const logoSrc = "/logo.webp";
+/** Served from `public/logo_ionbatech.svg` */
+export const logoSrc = "/logo_ionbatech.svg";
 export const logoAlt = "IonBATech";
 
 export const storeBaseUrl = "https://market.ionbatech.com";

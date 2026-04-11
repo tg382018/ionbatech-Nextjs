@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutDashboard, LogOut, Settings2 } from "lucide-react";
+import { BookOpen, LayoutDashboard, LogOut, Settings2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Genel bakış", icon: LayoutDashboard },
+  { href: "/admin/dashboard/blog", label: "Blog", icon: BookOpen },
   { href: "/admin/dashboard/ayarlar", label: "Ayarlar", icon: Settings2 },
 ] as const;
 
@@ -19,7 +20,9 @@ export function AdminSidebarNav() {
     <>
       <nav className="flex flex-1 flex-col gap-0.5 p-3">
         {navItems.map(({ href, label, icon: Icon }) => {
-          const active = pathname === href;
+          const active =
+            pathname === href ||
+            (href !== "/admin/dashboard" && pathname.startsWith(href));
           return (
             <Link
               key={href}

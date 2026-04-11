@@ -14,32 +14,14 @@ import {
   yearlyKwhFromDailyWh,
 } from "@/lib/solar-calculator/energy";
 
-import type { ElectricityAtSite, SelectedLine } from "./types";
-
-function narrativeForSite(e: ElectricityAtSite): string {
-  switch (e) {
-    case "yes":
-      return "Şebeke bağlantınız olduğu için öz tüketim, fazlasını şebekeye satma ve hibrit (batarya + şebeke) senaryoları tipik olarak en verimli seçeneklerdir.";
-    case "no":
-      return "Kurulum yerinde şebeke yoksa sistem genelde off-grid tasarlanır: güneş + batarya boyutlandırması kritik öneme sahiptir.";
-    case "construction":
-      return "Yapım veya geçici sahada enerji ihtiyacı için modüler ve taşınabilir çözümler, ileride şebekeye geçişe uyumlu genişletilebilir tasarımlar değerlendirilebilir.";
-    default:
-      return "";
-  }
-}
+import type { SelectedLine } from "./types";
 
 type StepSummaryProps = {
-  electricity: ElectricityAtSite;
   selected: SelectedLine[];
   onBack: () => void;
 };
 
-export function StepSummary({
-  electricity,
-  selected,
-  onBack,
-}: StepSummaryProps) {
+export function StepSummary({ selected, onBack }: StepSummaryProps) {
   let dailyWh = 0;
   for (const line of selected) {
     const app = getApplianceById(line.applianceId);
@@ -77,9 +59,9 @@ export function StepSummary({
 
         <Card className="border-primary/25 shadow-md">
           <CardHeader>
-            <CardTitle className="text-lg">Kurulum yeri</CardTitle>
+            <CardTitle className="text-lg">Tüketim tahmini</CardTitle>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              {narrativeForSite(electricity)}
+              Seçtiğiniz cihazlar ve kullanım sürelerine göre hesaplanmıştır.
             </p>
           </CardHeader>
           <CardContent className="grid gap-4 sm:grid-cols-2">

@@ -1,5 +1,7 @@
 "use client";
 
+import { Fragment } from "react";
+import { ChevronDown } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { processSection } from "@/lib/constants";
@@ -16,141 +18,130 @@ const stepSpring = {
   damping: 22,
 };
 
+function ArrowConnector() {
+  return (
+    <div
+      className="hidden h-12 shrink-0 items-center lg:flex lg:w-8 xl:w-12"
+      aria-hidden
+    >
+      <div className="h-px flex-1 bg-[#D1D5DB]" />
+      <svg
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        className="shrink-0 text-[#9CA3AF]"
+        aria-hidden
+      >
+        <path d="M0 0 L10 5 L0 10 Z" fill="currentColor" />
+      </svg>
+    </div>
+  );
+}
+
+function StepCircle({
+  index,
+  reduceMotion,
+}: {
+  index: number;
+  reduceMotion: boolean | null;
+}) {
+  const n = index + 1;
+  return (
+    <motion.span
+      className="relative z-[1] flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold tabular-nums text-primary-foreground shadow-[0_4px_14px_rgba(0,0,0,0.12)]"
+      initial={reduceMotion ? false : { scale: 0, opacity: 0 }}
+      whileInView={reduceMotion ? undefined : { scale: 1, opacity: 1 }}
+      viewport={viewport}
+      transition={{
+        ...stepSpring,
+        delay: 0.08 + index * 0.12,
+      }}
+    >
+      {n}
+    </motion.span>
+  );
+}
+
+function StepCard({
+  step,
+  index,
+  reduceMotion,
+}: {
+  step: (typeof steps)[number];
+  index: number;
+  reduceMotion: boolean | null;
+}) {
+  return (
+    <motion.article
+      className="flex w-full flex-col rounded-2xl border border-[#F0F0F0] bg-white px-5 py-6 text-center shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.1)] sm:px-6 sm:py-8"
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      viewport={viewport}
+      transition={{
+        duration: 0.5,
+        delay: 0.2 + index * 0.08,
+        ease: motionEase,
+      }}
+    >
+      <h3 className="font-heading text-base font-bold leading-snug text-[#1A1D23] sm:text-lg">
+        {step.title}
+      </h3>
+      <p className="mt-3 text-sm leading-relaxed text-[#6B7280]">
+        {step.description}
+      </p>
+    </motion.article>
+  );
+}
+
 export function ProcessStepsTimeline({ className }: { className?: string }) {
   const reduceMotion = useReducedMotion();
 
-  if (reduceMotion) {
-    return (
-      <ol
-        className={cn(
-          "grid gap-6 md:grid-cols-2 lg:grid-cols-4",
-          className
-        )}
-      >
-        {steps.map((step, index) => (
-          <li key={step.title}>
-            <div className="flex h-full flex-col rounded-2xl border border-border/80 bg-card p-6 shadow-sm ring-1 ring-foreground/5">
-              <span className="mb-4 flex size-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                {index + 1}
-              </span>
-              <h3 className="font-heading text-base font-semibold text-foreground">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {step.description}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    );
-  }
-
   return (
-    <div className={cn("space-y-10", className)}>
-      {/* Mobil: dikey çizgi + sıralı giriş */}
-      <ol className="relative list-none space-y-8 pl-1 lg:hidden">
-        <motion.div
-          className="absolute bottom-3 left-[1.125rem] top-3 w-1 rounded-full bg-muted"
-          aria-hidden
-        >
-          <motion.div
-            className="h-full w-full origin-top rounded-full bg-gradient-to-b from-primary via-primary/70 to-primary/30"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={viewport}
-            transition={{ duration: 1.15, ease: motionEase }}
-          />
-        </motion.div>
+    <div className={cn("w-full", className)}>
+      {/* Mobil / tablet: dikey akış */}
+      <ol className="relative list-none space-y-0 lg:hidden">
         {steps.map((step, index) => (
-          <motion.li
-            key={step.title}
-            className="relative flex gap-5 pl-10"
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={viewport}
-            transition={{
-              duration: 0.5,
-              delay: index * 0.12,
-              ease: motionEase,
-            }}
-          >
-            <motion.span
-              className="absolute left-0 top-1 flex size-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground shadow-md shadow-primary/25 ring-4 ring-background"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={viewport}
-              transition={{ ...stepSpring, delay: index * 0.12 + 0.05 }}
-            >
-              {index + 1}
-            </motion.span>
-            <div className="min-w-0 flex-1 rounded-2xl border border-border/80 bg-card p-5 shadow-sm ring-1 ring-foreground/5">
-              <h3 className="font-heading text-base font-semibold text-foreground">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {step.description}
-              </p>
+          <li key={step.title} className="flex flex-col items-center">
+            <div className="flex w-full max-w-md flex-col items-center">
+              <StepCircle index={index} reduceMotion={reduceMotion} />
+              <div className="mt-6 w-full">
+                <StepCard
+                  step={step}
+                  index={index}
+                  reduceMotion={reduceMotion}
+                />
+              </div>
             </div>
-          </motion.li>
-        ))}
-      </ol>
-
-      {/* Masaüstü: tek sıra, hat + adım + kart */}
-      <ol className="relative hidden list-none gap-6 lg:grid lg:grid-cols-4">
-        <div
-          className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-6 h-1.5 rounded-full bg-muted"
-          aria-hidden
-        />
-        <motion.div
-          className="pointer-events-none absolute left-[12.5%] top-6 h-1.5 w-[75%] overflow-hidden rounded-full"
-          aria-hidden
-        >
-          <motion.div
-            className="h-full w-full origin-left rounded-full bg-gradient-to-r from-primary via-primary/85 to-primary/45 shadow-[0_0_18px_oklch(0.46_0.16_148_/_0.3)]"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={viewport}
-            transition={{ duration: 1.2, ease: motionEase, delay: 0.06 }}
-          />
-        </motion.div>
-
-        {steps.map((step, index) => (
-          <li key={step.title} className="flex flex-col items-center text-center">
-            <motion.span
-              className="relative z-[1] flex size-12 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-primary-foreground shadow-lg shadow-primary/30 ring-4 ring-card"
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={viewport}
-              transition={{
-                ...stepSpring,
-                delay: 0.12 + index * 0.14,
-              }}
-            >
-              {index + 1}
-            </motion.span>
-            <motion.div
-              className="mt-10 flex w-full flex-col rounded-2xl border border-border/80 bg-card p-6 text-left shadow-sm ring-1 ring-foreground/5 transition-shadow duration-300 hover:shadow-md"
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{
-                duration: 0.55,
-                delay: 0.32 + index * 0.1,
-                ease: motionEase,
-              }}
-              whileHover={{ y: -4 }}
-            >
-              <h3 className="font-heading text-base font-semibold leading-snug text-foreground">
-                {step.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {step.description}
-              </p>
-            </motion.div>
+            {index < steps.length - 1 ? (
+              <div
+                className="flex justify-center py-3 text-[#9CA3AF]"
+                aria-hidden
+              >
+                <ChevronDown className="size-6 stroke-[1.5]" />
+              </div>
+            ) : null}
           </li>
         ))}
       </ol>
+
+      {/* Masaüstü: [sütun][ok][sütun][ok][sütun][ok][sütun] */}
+      <div className="hidden lg:flex lg:w-full lg:items-start lg:justify-center">
+        {steps.map((step, index) => (
+          <Fragment key={step.title}>
+            {index > 0 ? <ArrowConnector /> : null}
+            <div className="flex min-w-0 flex-1 flex-col items-center">
+              <StepCircle index={index} reduceMotion={reduceMotion} />
+              <div className="mt-10 w-full px-0">
+                <StepCard
+                  step={step}
+                  index={index}
+                  reduceMotion={reduceMotion}
+                />
+              </div>
+            </div>
+          </Fragment>
+        ))}
+      </div>
     </div>
   );
 }

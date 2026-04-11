@@ -322,45 +322,32 @@ export const useCasesSection = {
 
 export const whyUsSection = {
   id: "neden-biz",
+  badge: "NEDEN BİZ?",
   title: "Neden IonBATech?",
-  subtitle:
-    "Türkiye’de enerji depolama ve solar alanında ürün çeşitliliği tek başına yeterli değildir; güvenilir sistem teslimi için mühendislik ve satış desteği birlikte sunulmalıdır.",
   items: [
     {
+      key: "turnkey" as const,
+      title: "Anahtar Teslim Kurulum",
+      description:
+        "Profesyonel ekibimiz tüm kurulum sürecini sizin için yönetir",
+    },
+    {
+      key: "warranty" as const,
+      title: "25 Yıl Garanti",
+      description:
+        "Tüm sistemlerimiz 25 yıl performans garantisi ile gelir",
+    },
+    {
+      key: "nationwide" as const,
+      title: "Türkiye Geneli Hizmet",
+      description:
+        "81 ilde profesyonel kurulum ve servis hizmeti",
+    },
+    {
       key: "engineering" as const,
-      title: "Mühendislik odaklı sistem tasarımı",
+      title: "Uzman Mühendislik",
       description:
-        "Yük listesi ve çalışma profiline göre topoloji seçilir; hazır paket yerine senaryonuza uygun mimari önerilir.",
-    },
-    {
-      key: "products" as const,
-      title: "Güvenilir ürün seçimi",
-      description:
-        "Batarya, inverter ve güç elektroniğinde belgelendirme ve saha geri bildirimleriyle uyumlu ürün hatları.",
-    },
-    {
-      key: "modular" as const,
-      title: "Modüler batarya mimarisi",
-      description:
-        "İleride kapasite artışını öngören paralel modül düzenleri; mevcut inverter ve koruma sınırlarıyla uyumlu büyüme.",
-    },
-    {
-      key: "capacity" as const,
-      title: "Doğru kapasite planlama",
-      description:
-        "kWh yanında kW tepe gücü, yedek süre ve şarj kaynakları birlikte hesaplanır; aşırı veya yetersiz investasyon önlenir.",
-    },
-    {
-      key: "support" as const,
-      title: "Satış sonrası teknik destek",
-      description:
-        "Kurulum öncesi uyumluluk soruları ve devreye alma aşamasında teknik yönlendirme; erişilebilir iletişim kanalları.",
-    },
-    {
-      key: "logistics" as const,
-      title: "Türkiye genelinde lojistik",
-      description:
-        "Kayseri merkezli operasyonla sipariş ve sevkiyat süreçlerinin ülke genelinde yönetimi.",
+        "Deneyimli mühendis kadromuzla size özel çözümler",
     },
   ],
 } as const;
@@ -426,29 +413,27 @@ export const categoriesSection = {
 
 export const processSection = {
   id: "surec",
-  title: "Çalışma sürecimiz",
-  subtitle:
-    "Tek tip paket satmak yerine önce ihtiyacı ölçüyor, sonra mimariyi ve ürün listesini birlikte netleştiriyoruz.",
+  title: "Nasıl Çalışır?",
   steps: [
     {
-      title: "Enerji ihtiyacı analizi",
+      title: "İhtiyacını Belirle",
       description:
-        "Yük listesi, günlük ve mevsimsel kullanım, şebeke durumu ve yedek süre beklentisi birlikte değerlendirilir.",
+        "Enerji ihtiyacınızı belirleyin ve size en uygun sistemi seçin",
     },
     {
-      title: "Sistem mimarisi tasarımı",
+      title: "Ücretsiz Keşif",
       description:
-        "Solar, inverter, batarya ve koruma topolojisi çizilir; kapasite ve güç sınıfları bu mimariye bağlanır.",
+        "Uzman ekibimiz ücretsiz keşif yapar ve size özel teklif sunar",
     },
     {
-      title: "Doğru ürün seçimi",
+      title: "Kurulum",
       description:
-        "Stoklu hatlarımızdan uyumlu batarya, inverter ve çevre ekipmanı seçilir; alternatifler şeffaf biçimde paylaşılır.",
+        "Profesyonel ekibimiz sistemi kurar ve devreye alır",
     },
     {
-      title: "Kurulum ve teknik destek",
+      title: "Üretmeye Başla",
       description:
-        "Saha ekibiniz veya partner kurulumla eş zamanlı teknik sorularınız yanıtlanır; devreye alma kontrolleri yönlendirilir.",
+        "Sisteminiz çalışmaya başlar ve enerji üretmeye başlarsınız",
     },
   ],
 } as const;

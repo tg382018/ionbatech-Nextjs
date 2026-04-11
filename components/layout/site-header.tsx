@@ -109,6 +109,35 @@ export function SiteHeader() {
       "border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
   );
 
+  /** Mağaza — daha görünür: emerald çerçeve + nefes alan glow + hafif parlama şeridi */
+  const shopBtnClass = cn(
+    buttonVariants({ variant: "outline", size: "lg" }),
+    "header-shop-btn inline-flex items-center justify-center rounded-full font-semibold transition-colors duration-300",
+    collapsed ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6",
+    lightOnVideo &&
+      cn(
+        "border-emerald-300/65 bg-white/[0.16] text-white backdrop-blur-sm hover:border-emerald-200/80 hover:bg-white/24",
+        "header-shop-glow-dark"
+      ),
+    isHome &&
+      pastBanner &&
+      cn(
+        "border-[#126458]/50 bg-white text-[#126458] shadow-sm hover:border-[#126458]/70 hover:bg-emerald-50/95",
+        "header-shop-glow-light header-shop-btn-light"
+      ),
+    isBlog &&
+      cn(
+        "border-[#126458]/50 bg-white text-[#126458] shadow-sm hover:border-[#126458]/70 hover:bg-emerald-50/95",
+        "header-shop-glow-light header-shop-btn-light"
+      ),
+    !isHome &&
+      !isBlog &&
+      cn(
+        "border-emerald-400/60 bg-white/[0.13] text-white backdrop-blur-sm hover:border-emerald-300/75 hover:bg-white/22",
+        "header-shop-glow-dark"
+      )
+  );
+
   const primaryBtnClass = cn(
     buttonVariants({ variant: "default", size: "lg" }),
     "rounded-full border-0 bg-[#126458] font-semibold text-white shadow-md hover:bg-[#0e4d44]",
@@ -212,8 +241,8 @@ export function SiteHeader() {
               collapsed ? "gap-1.5 sm:gap-2" : "gap-2 sm:gap-3"
             )}
           >
-            <NavAnchor href={shopHomeHref} className={outlineBtnClass}>
-              Mağaza
+            <NavAnchor href={shopHomeHref} className={shopBtnClass}>
+              <span className="relative z-[1]">Mağaza</span>
             </NavAnchor>
             <NavAnchor href={contactHref} className={primaryBtnClass}>
               <span className="flex items-center gap-1.5">
@@ -283,12 +312,12 @@ export function SiteHeader() {
             <NavAnchor
               href={shopHomeHref}
               className={cn(
-                outlineBtnClass,
+                shopBtnClass,
                 "flex h-11 w-full justify-center"
               )}
               onNavigate={() => setOpen(false)}
             >
-              Mağaza
+              <span className="relative z-[1]">Mağaza</span>
             </NavAnchor>
             <NavAnchor
               href={contactHref}

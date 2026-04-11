@@ -193,6 +193,99 @@
   }
 }
 
+/* Header Mağaza CTA — yumuşak glow + parlama şeridi */
+@keyframes header-shop-glow-dark {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(167, 243, 208, 0.32),
+      0 0 16px -2px rgba(18, 100, 88, 0.42);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(110, 231, 183, 0.55),
+      0 0 28px 2px rgba(52, 211, 153, 0.38);
+  }
+}
+
+@keyframes header-shop-glow-light {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(18, 100, 88, 0.2),
+      0 0 12px -2px rgba(18, 100, 88, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(18, 100, 88, 0.38),
+      0 0 22px 2px rgba(18, 100, 88, 0.22);
+  }
+}
+
+@keyframes header-shop-sheen {
+  0% {
+    transform: translateX(-130%) skewX(-14deg);
+  }
+  28%,
+  100% {
+    transform: translateX(230%) skewX(-14deg);
+  }
+}
+
+.header-shop-btn {
+  position: relative;
+  isolation: isolate;
+}
+
+.header-shop-btn::after {
+  content: "";
+  position: absolute;
+  inset: -4px -50%;
+  z-index: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 42%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.06) 58%,
+    transparent 100%
+  );
+  animation: header-shop-sheen 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.header-shop-btn-light::after {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(18, 100, 88, 0.06) 42%,
+    rgba(18, 100, 88, 0.14) 50%,
+    rgba(18, 100, 88, 0.06) 58%,
+    transparent 100%
+  );
+}
+
+.header-shop-glow-dark {
+  animation: header-shop-glow-dark 2.75s ease-in-out infinite;
+}
+
+.header-shop-glow-light {
+  animation: header-shop-glow-light 2.75s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-shop-btn::after,
+  .header-shop-glow-dark,
+  .header-shop-glow-light {
+    animation: none !important;
+  }
+
+  .header-shop-glow-dark,
+  .header-shop-glow-light {
+    box-shadow: 0 0 0 1px rgba(18, 100, 88, 0.28) !important;
+  }
+}
+
 /* Hub diyagramı: enerji akışı çizgileri */
 @keyframes energy-flow-dash {
   to {

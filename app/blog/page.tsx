@@ -4,7 +4,10 @@ import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
-import { blogPosts, formatBlogDate } from "@/lib/blog-data";
+import { formatBlogDate, getPublishedPosts } from "@/lib/blog-data";
+
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Blog",
   description:
@@ -16,7 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getPublishedPosts();
+
   return (
     <div className="border-b border-border bg-background">
       <div className="border-b border-border/80 bg-muted/30 py-12 sm:py-16">
@@ -35,61 +40,67 @@ export default function BlogPage() {
       </div>
 
       <Container className="py-10 sm:py-14">
-        <ul className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
-          {blogPosts.map((post, index) => (
-            <li key={post.slug}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border/80 bg-card shadow-sm ring-1 ring-foreground/[0.04] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="relative aspect-[16/9] w-full overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label={post.title}
-                >
-                  <Image
-                    src={post.coverImage.src}
-                    alt={post.coverImage.alt}
-                    fill
-                    priority={index === 0}
-                    loading={index === 0 ? "eager" : undefined}
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                  />
-                </Link>
-                <div className="flex flex-1 flex-col p-4">
-                  <time
-                    className="text-xs text-muted-foreground"
-                    dateTime={post.publishedAt}
+        {blogPosts.length === 0 ? (
+          <p className="text-center text-sm text-muted-foreground">
+            Henüz yayınlanmış yazı yok.
+          </p>
+        ) : (
+          <ul className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-5">
+            {blogPosts.map((post, index) => (
+              <li key={post.slug}>
+                <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border/80 bg-card shadow-sm ring-1 ring-foreground/[0.04] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="relative aspect-[16/9] w-full overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    aria-label={post.title}
                   >
-                    {formatBlogDate(post.publishedAt)}
-                  </time>
-                  <h2 className="mt-2 font-heading text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="line-clamp-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    <Image
+                      src={post.coverImage.src}
+                      alt={post.coverImage.alt}
+                      fill
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : undefined}
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                    />
+                  </Link>
+                  <div className="flex flex-1 flex-col p-4">
+                    <time
+                      className="text-xs text-muted-foreground"
+                      dateTime={post.publishedAt}
                     >
-                      {post.title}
-                    </Link>
-                  </h2>
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-[13px] line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-3">
-                    <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
-                      <Clock className="size-3" aria-hidden />
-                      {post.readingMinutes} dk
-                    </span>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
-                    >
-                      Oku
-                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
+                      {formatBlogDate(post.publishedAt)}
+                    </time>
+                    <h2 className="mt-2 font-heading text-base font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="line-clamp-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      >
+                        {post.title}
+                      </Link>
+                    </h2>
+                    <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-[13px] line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border/60 pt-3">
+                      <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+                        <Clock className="size-3" aria-hidden />
+                        {post.readingMinutes} dk
+                      </span>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-0.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+                      >
+                        Oku
+                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </div>
   );

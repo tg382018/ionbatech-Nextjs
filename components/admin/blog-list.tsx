@@ -1,9 +1,8 @@
 "use client";
 
-import { MoreHorizontal, Pencil, Trash2, ExternalLink } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
+import { BlogRowActions } from "@/components/admin/blog-row-actions";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -13,13 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Table,
   TableBody,
   TableCell,
@@ -28,12 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { AdminBlogRow } from "@/lib/admin-blog-mock";
-import {
-  adminDraftBlogs,
-  adminPublishedBlogs,
-} from "@/lib/admin-blog-mock";
-import { cn } from "@/lib/utils";
+import type { AdminBlogRow } from "@/lib/blog-types";
 
 function formatDate(iso: string | null) {
   if (!iso) return "—";
@@ -109,7 +96,7 @@ function BlogTable({ rows }: { rows: AdminBlogRow[] }) {
               )}
             </TableCell>
             <TableCell className="text-right">
-              <RowActions row={row} />
+              <BlogRowActions row={row} />
             </TableCell>
           </TableRow>
         ))}
@@ -118,41 +105,14 @@ function BlogTable({ rows }: { rows: AdminBlogRow[] }) {
   );
 }
 
-function RowActions({ row }: { row: AdminBlogRow }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        className={cn(
-          "inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        )}
-        aria-label="İşlemler"
-      >
-        <MoreHorizontal className="size-4" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-44">
-        {row.status === "published" ? (
-          <DropdownMenuItem render={<Link href={`/blog/${row.slug}`} />}>
-            <ExternalLink className="size-4 opacity-70" />
-            Sitede aç
-          </DropdownMenuItem>
-        ) : null}
-        <DropdownMenuItem disabled className="cursor-not-allowed opacity-70">
-          <Pencil className="size-4 opacity-70" />
-          Düzenle
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive" disabled>
-          <Trash2 className="size-4 opacity-70" />
-          Sil
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
+type BlogListProps = {
+  published: AdminBlogRow[];
+  drafts: AdminBlogRow[];
+};
 
-export function BlogList() {
-  const pubCount = adminPublishedBlogs.length;
-  const draftCount = adminDraftBlogs.length;
+export function BlogList({ published, drafts }: BlogListProps) {
+  const pubCount = published.length;
+  const draftCount = drafts.length;
 
   return (
     <Card className="border-stone-200 bg-white shadow-sm">
@@ -161,7 +121,7 @@ export function BlogList() {
           Yazılar
         </CardTitle>
         <CardDescription>
-          Yayında olan içerikler ve taslaklar. Düzenleme API ile etkinleşecek.
+          Yayında olan içerikler ve taslaklar. Düzenleme ve silme buradan.
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-6">
@@ -175,10 +135,10 @@ export function BlogList() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="published" className="mt-0">
-            <BlogTable rows={adminPublishedBlogs} />
+            <BlogTable rows={published} />
           </TabsContent>
           <TabsContent value="drafts" className="mt-0">
-            <BlogTable rows={adminDraftBlogs} />
+            <BlogTable rows={drafts} />
           </TabsContent>
         </Tabs>
       </CardContent>

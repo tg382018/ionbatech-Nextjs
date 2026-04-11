@@ -5,17 +5,18 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { Container } from "@/components/layout/container";
-import { formatBlogDate, getAllSlugs, getPostBySlug } from "@/lib/blog-data";
+import {
+  formatBlogDate,
+  getPublishedPostBySlug,
+} from "@/lib/blog-data";
+
+export const revalidate = 60;
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPublishedPostBySlug(slug);
   if (!post) {
     return { title: "Yazı bulunamadı" };
   }
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPublishedPostBySlug(slug);
   if (!post) {
     notFound();
   }

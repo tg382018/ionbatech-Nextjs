@@ -3,8 +3,11 @@ import { Plus } from "lucide-react";
 
 import { BlogList } from "@/components/admin/blog-list";
 import { Button } from "@/components/ui/button";
+import { listAllBlogPostsForAdmin } from "@/lib/blog-admin-queries";
 
-export default function AdminBlogPage() {
+export default async function AdminBlogPage() {
+  const { published, drafts, loadError } = await listAllBlogPostsForAdmin();
+
   return (
     <div className="flex flex-1 flex-col p-6 sm:p-8">
       <header className="flex flex-col gap-4 border-b border-stone-200/90 pb-6 sm:flex-row sm:items-start sm:justify-between">
@@ -13,7 +16,8 @@ export default function AdminBlogPage() {
             Blog
           </h1>
           <p className="mt-1 text-sm text-stone-500">
-            Yayınları yönetin; yeni yazı oluşturun. Kayıt API ile bağlanacak.
+            Yayınları yönetin; yeni yazı oluşturun. Veriler Supabase üzerinden
+            okunur ve yazılır.
           </p>
         </div>
         <Button
@@ -26,8 +30,17 @@ export default function AdminBlogPage() {
         </Button>
       </header>
 
+      {loadError ? (
+        <div
+          className="mt-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+          role="alert"
+        >
+          {loadError}
+        </div>
+      ) : null}
+
       <div className="mt-8 flex-1">
-        <BlogList />
+        <BlogList published={published} drafts={drafts} />
       </div>
     </div>
   );

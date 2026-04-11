@@ -11,6 +11,7 @@ import {
   Quote,
   type LucideIcon,
 } from "lucide-react";
+import { useFormStatus } from "react-dom";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -26,24 +27,84 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-export function BlogEditorForm() {
-  const [coverUrl, setCoverUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [seoTags, setSeoTags] = useState("");
-  const [body, setBody] = useState("");
+export type BlogEditorInitial = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverUrl: string;
+  seoTags: string;
+  body: string;
+};
+
+function SubmitRow() {
+  const { pending } = useFormStatus();
+  return (
+    <div className="flex flex-col-reverse gap-3 border-t border-stone-200 pt-6 sm:flex-row sm:justify-end">
+      <Button
+        type="submit"
+        name="intent"
+        value="draft"
+        variant="outline"
+        disabled={pending}
+        className="sm:min-w-[120px]"
+      >
+        Taslak
+      </Button>
+      <Button
+        type="submit"
+        name="intent"
+        value="publish"
+        disabled={pending}
+        className="bg-[#126458] font-semibold text-white hover:bg-[#0e4d44] sm:min-w-[120px]"
+      >
+        Yayınla
+      </Button>
+    </div>
+  );
+}
+
+type BlogEditorFormProps = {
+  action: (formData: FormData) => Promise<void>;
+  initial?: BlogEditorInitial;
+  errorMessage?: string | null;
+};
+
+export function BlogEditorForm({
+  action,
+  initial,
+  errorMessage,
+}: BlogEditorFormProps) {
+  const [coverUrl, setCoverUrl] = useState(initial?.coverUrl ?? "");
+  const [title, setTitle] = useState(initial?.title ?? "");
+  const [slug, setSlug] = useState(initial?.slug ?? "");
+  const [excerpt, setExcerpt] = useState(initial?.excerpt ?? "");
+  const [seoTags, setSeoTags] = useState(initial?.seoTags ?? "");
+  const [body, setBody] = useState(initial?.body ?? "");
 
   return (
-    <form
-      className="mx-auto max-w-3xl space-y-6"
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <form action={action} className="mx-auto max-w-3xl space-y-6">
+      {initial?.id ? (
+        <input type="hidden" name="id" value={initial.id} />
+      ) : null}
+      <input type="hidden" name="author" value="IonBATech" />
+
+      {errorMessage ? (
+        <p
+          className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          role="alert"
+        >
+          {errorMessage}
+        </p>
+      ) : null}
+
       <Card className="border-stone-200 bg-white shadow-sm">
         <CardHeader className="border-b border-stone-100 pb-4">
           <CardTitle className="font-heading text-base text-stone-900">
             Yayın bilgileri
           </CardTitle>
           <CardDescription>
-            Kapak görseli URL, başlık ve SEO alanları.
+            Kapak görseli URL, başlık, slug, özet ve SEO alanları.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-5 pt-6">
@@ -57,11 +118,9 @@ export function BlogEditorForm() {
               onChange={(e) => setCoverUrl(e.target.value)}
               placeholder="https://…"
               autoComplete="off"
+              required
               className="h-10 border-stone-200 bg-white"
             />
-            <p className="text-xs text-muted-foreground">
-              Görsel adresi kaydedilecek; yükleme API ile eklenecek.
-            </p>
           </div>
 
           <div className="space-y-2">
@@ -73,7 +132,34 @@ export function BlogEditorForm() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Yazı başlığı"
+              required
               className="h-10 border-stone-200 bg-white"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="blog-slug">Slug (boş bırakılırsa başlıktan üretilir)</Label>
+            <Input
+              id="blog-slug"
+              type="text"
+              name="slug"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              placeholder="ornek-yazi-url"
+              className="h-10 border-stone-200 bg-white font-mono text-sm"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="blog-excerpt">Özet</Label>
+            <Textarea
+              id="blog-excerpt"
+              name="excerpt"
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
+              placeholder="Liste ve önizleme için kısa özet"
+              rows={3}
+              className="border-stone-200 bg-white text-sm"
             />
           </div>
 
@@ -99,10 +185,11 @@ export function BlogEditorForm() {
       <Card className="border-stone-200 bg-white shadow-sm">
         <CardHeader className="border-b border-stone-100 pb-4">
           <CardTitle className="font-heading text-base text-stone-900">
-            İçerik (zengin metin)
+            İçerik
           </CardTitle>
           <CardDescription>
-            Şimdilik düz metin; editör API ile birlikte eklenecek.
+            Paragrafları boş satırla ayırın; her blok ayrı paragraf olarak
+            kaydedilir.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-0 pt-0">
@@ -130,7 +217,7 @@ export function BlogEditorForm() {
               value={body}
               onChange={(e) => setBody(e.target.value)}
               rows={16}
-              placeholder="Yazı gövdesi. Gerçek editör (Tiptap vb.) API ile birlikte eklenecek."
+              placeholder="Yazı gövdesi. Paragraflar arasında boş satır kullanın."
               className={cn(
                 "min-h-[280px] resize-y rounded-none border-0 bg-transparent px-3 py-3 text-sm leading-relaxed shadow-none focus-visible:ring-0"
               )}
@@ -139,17 +226,7 @@ export function BlogEditorForm() {
         </CardContent>
       </Card>
 
-      <div className="flex flex-col-reverse gap-3 border-t border-stone-200 pt-6 sm:flex-row sm:justify-end">
-        <Button type="button" variant="outline" className="sm:min-w-[120px]">
-          Taslak
-        </Button>
-        <Button
-          type="button"
-          className="bg-[#126458] font-semibold text-white hover:bg-[#0e4d44] sm:min-w-[120px]"
-        >
-          Yayınla
-        </Button>
-      </div>
+      <SubmitRow />
     </form>
   );
 }

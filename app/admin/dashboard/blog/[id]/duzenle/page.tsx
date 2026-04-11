@@ -1,16 +1,41 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
-import { createBlogPostAction } from "@/app/admin/dashboard/blog/actions";
+import { updateBlogPostAction } from "@/app/admin/dashboard/blog/actions";
 import { BlogEditorForm } from "@/components/admin/blog-editor-form";
 import { Button } from "@/components/ui/button";
+import { getBlogPostRowByIdForAdmin } from "@/lib/blog-admin-queries";
 
-export default async function AdminBlogNewPage({
+function paragraphsToBody(raw: unknown): string {
+  if (!Array.isArray(raw)) return "";
+  return raw.filter((x): x is string => typeof x === "string").join("\n\n");
+}
+
+export default async function AdminBlogEditPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ id: string }>;
   searchParams: Promise<{ error?: string }>;
 }) {
+  const { id } = await params;
   const { error } = await searchParams;
+
+  const row = await getBlogPostRowByIdForAdmin(id);
+  if (!row) {
+    notFound();
+  }
+
+  const initial = {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt,
+    coverUrl: row.cover_image_src,
+    seoTags: row.seo_tags ?? "",
+    body: paragraphsToBody(row.paragraphs),
+  };
 
   return (
     <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -27,15 +52,17 @@ export default async function AdminBlogNewPage({
       </div>
       <header className="border-b border-stone-200/90 pb-6">
         <h1 className="font-heading text-2xl font-bold tracking-tight text-stone-900">
-          Yeni blog yazısı
+          Yazıyı düzenle
         </h1>
         <p className="mt-1 text-sm text-stone-500">
-          Taslak veya yayın olarak kaydedin; içerik Supabase’e yazılır.
+          Slug veya içerik değişince site önbelleği yenilenir.
         </p>
       </header>
       <div className="mt-8 flex-1">
         <BlogEditorForm
-          action={createBlogPostAction}
+          key={row.id}
+          action={updateBlogPostAction}
+          initial={initial}
           errorMessage={error ? decodeURIComponent(error) : undefined}
         />
       </div>

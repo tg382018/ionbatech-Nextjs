@@ -34,8 +34,9 @@ export const heroContent = {
 /** Full-bleed hero: video arka plan + poster / hareket azaltma yedeği. */
 export const heroBanner = {
   videoSrc: "/video.mp4",
+  /** ~1200px genişlik: 2400px poster gereksiz LCP yükü üretiyordu; sıkıştırma için q=75. */
   imageSrc:
-    "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=2400&q=80",
+    "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1200&q=75",
   imageAlt: "Modern çatı üzerinde güneş panelleri kurulumu",
   badge: "Sistem entegrasyonu · Kapasite planlama · Teknik destek",
 } as const;

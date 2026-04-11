@@ -28,6 +28,8 @@ if (supabaseUrl) {
 const nextConfig: NextConfig = {
   images: {
     remotePatterns,
+    /** Varsayılan [..384] sonrası doğrudan 640’a sıçınıyordu; kart ~220px@2x için ara genişlikler. */
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 448, 512],
   },
   async redirects() {
     return [

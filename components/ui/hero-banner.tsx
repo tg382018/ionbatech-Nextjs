@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type VideoHTMLAttributes } from "react";
 
 import {
   heroBanner,
@@ -163,8 +163,11 @@ export function HeroBanner() {
               loop
               muted
               playsInline
-              preload="auto"
+              preload="metadata"
               poster={heroBanner.imageSrc}
+              {...({
+                fetchPriority: "high",
+              } as VideoHTMLAttributes<HTMLVideoElement>)}
               aria-hidden
             >
               <source src={heroBanner.videoSrc} type="video/mp4" />

@@ -31,7 +31,7 @@ const solutionIcons: Record<SolutionIconKey, typeof Battery> = {
 function bentoCellClass(iconKey: SolutionIconKey): string {
   switch (iconKey) {
     case "storage":
-      return "md:col-span-2 md:row-span-2 md:min-h-[220px]";
+      return "md:col-span-2 md:row-span-2 md:min-h-[168px]";
     case "solar":
     case "battery":
       return "";
@@ -125,7 +125,7 @@ export function SolutionsSection() {
 
         {/* Bento grid */}
         <motion.div
-          className="grid auto-rows-fr gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-4"
+          className="grid auto-rows-fr gap-2.5 md:grid-cols-2 lg:grid-cols-4 lg:gap-3"
           initial={reduceMotion ? undefined : "hidden"}
           whileInView="visible"
           viewport={{ once: true, margin: "-64px" }}

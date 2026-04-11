@@ -36,7 +36,7 @@ export function SolutionBentoCard({
       <a
         href={href}
         className={cn(
-          "group relative isolate block h-full min-h-[220px] overflow-hidden rounded-2xl border border-white/10 shadow-lg ring-1 ring-foreground/5 transition-all duration-500 lg:min-h-0",
+          "group relative isolate block h-full min-h-[168px] overflow-hidden rounded-xl border border-white/10 shadow-lg ring-1 ring-foreground/5 transition-all duration-500 lg:min-h-0",
           "hover:shadow-2xl hover:shadow-primary/20 hover:ring-primary/20",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           gridClassName
@@ -62,27 +62,27 @@ export function SolutionBentoCard({
           aria-hidden
         />
 
-        <div className="relative z-[1] flex h-full min-h-[220px] flex-col justify-end gap-3 p-5 sm:p-6 lg:min-h-0">
+        <div className="relative z-[1] flex h-full min-h-[168px] flex-col justify-end gap-2 p-4 sm:p-4 lg:min-h-0">
           <div className="flex items-start justify-between gap-2">
-            <div className="flex size-11 items-center justify-center rounded-xl bg-primary/90 text-primary-foreground shadow-md shadow-primary/25 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2">
-              <Icon className="size-5" aria-hidden />
+            <div className="flex size-9 items-center justify-center rounded-lg bg-primary/90 text-primary-foreground shadow-md shadow-primary/25 backdrop-blur-sm ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-2">
+              <Icon className="size-4" aria-hidden />
             </div>
-            <div className="flex size-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-105">
+            <div className="flex size-7 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-primary group-hover:scale-105">
               <ArrowUpRight
-                className="size-4 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="size-3.5 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 aria-hidden
               />
             </div>
           </div>
-          <div className="space-y-2">
-            <h3 className="font-heading text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
+          <div className="space-y-1.5">
+            <h3 className="font-heading text-base font-bold tracking-tight text-white sm:text-lg lg:text-xl">
               {title}
             </h3>
-            <p className="max-w-xl text-xs leading-relaxed text-white/75 sm:text-sm">
+            <p className="max-w-xl text-[0.6875rem] leading-relaxed text-white/75 sm:text-xs">
               {description}
             </p>
             {benefits && benefits.length > 0 ? (
-              <ul className="max-w-xl list-inside list-disc space-y-1 pl-0.5 text-[0.6875rem] leading-snug text-white/78 marker:text-emerald-300/90 sm:text-xs">
+              <ul className="max-w-xl list-inside list-disc space-y-0.5 pl-0.5 text-[0.625rem] leading-snug text-white/78 marker:text-emerald-300/90 sm:text-[0.6875rem]">
                 {benefits.map((b) => (
                   <li key={b}>{b}</li>
                 ))}
@@ -102,7 +102,7 @@ export function SolutionBentoCard({
     <a
       href={href}
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.03] transition-all duration-500",
+        "group relative flex h-full flex-col overflow-hidden rounded-lg border border-border/60 bg-card shadow-sm ring-1 ring-foreground/[0.03] transition-all duration-500",
         "hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 hover:ring-primary/10",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         gridClassName
@@ -110,7 +110,7 @@ export function SolutionBentoCard({
       aria-label={`${title} — İncele`}
       {...linkProps}
     >
-      <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden sm:aspect-[16/9]">
+      <div className="relative aspect-[5/3] w-full shrink-0 overflow-hidden sm:aspect-[2.2/1]">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -123,24 +123,24 @@ export function SolutionBentoCard({
           aria-hidden
         />
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4 sm:p-4">
+      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:p-3">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-md group-hover:shadow-primary/25 group-hover:scale-105">
-            <Icon className="size-[18px] sm:size-5" aria-hidden />
+          <div className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary ring-1 ring-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-md group-hover:shadow-primary/25 group-hover:scale-105">
+            <Icon className="size-4" aria-hidden />
           </div>
           <ArrowUpRight
-            className="size-3.5 shrink-0 text-muted-foreground/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary sm:size-4"
+            className="size-3 shrink-0 text-muted-foreground/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary sm:size-3.5"
             aria-hidden
           />
         </div>
-        <h3 className="font-heading text-sm font-semibold tracking-tight text-foreground sm:text-base">
+        <h3 className="font-heading text-xs font-semibold tracking-tight text-foreground sm:text-sm">
           {title}
         </h3>
-        <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+        <p className="text-[0.6875rem] leading-relaxed text-muted-foreground sm:text-xs">
           {description}
         </p>
         {benefits && benefits.length > 0 ? (
-          <ul className="mt-1 list-inside list-disc space-y-0.5 text-[0.6875rem] leading-snug text-muted-foreground marker:text-primary sm:text-xs">
+          <ul className="mt-0.5 list-inside list-disc space-y-0.5 text-[0.625rem] leading-snug text-muted-foreground marker:text-primary sm:text-[0.6875rem]">
             {benefits.map((b) => (
               <li key={b}>{b}</li>
             ))}

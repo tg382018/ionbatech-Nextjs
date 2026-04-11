@@ -78,10 +78,10 @@ export const brandTrustStripItems = [
 /** Ana sayfa — iş ortakları kayan şerit (logo görselleri `public/` altında). */
 export const partnersSection = {
   id: "ortaklar",
-  badge: "İş birliğimiz",
-  title: "Ortaklarımız",
+  badge: "İş birliği ortak firmalar",
+  title: "Dünya Markaları ile Güçlü Ortaklık",
   subtitle:
-    "İş birliği yaptığımız firmalar ve güvenilir çözüm ortaklarımızla birlikte büyüyoruz.",
+    "Dünyanın ve Türkiye'nin önde gelen enerji markalarıyla birlikte geliştirdiğimiz yüksek verimli çözümleri sizlere sunuyoruz.",
   partners: [
     {
       key: "cw-enerji" as const,

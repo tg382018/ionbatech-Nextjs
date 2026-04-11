@@ -29,7 +29,7 @@ export default function BlogPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
             Batarya sistemleri, inverter seçimi ve saha uygulamalarına dair özet
-            içerikler. (Örnek makaleler — mock veri.)
+            içerikler.
           </p>
         </Container>
       </div>

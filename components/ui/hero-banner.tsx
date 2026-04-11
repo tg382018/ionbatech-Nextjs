@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Award, Cpu, Headset, ShieldCheck } from "lucide-react";
+import { ArrowRight, Award, Cpu, Headset, ShieldCheck, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
@@ -47,6 +47,42 @@ function HeroPrimaryCta({ href, label }: { href: string; label: string }) {
       >
         <ArrowRight className="size-5 text-white" strokeWidth={2.25} />
       </span>
+    </>
+  );
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        className={classes}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={classes}>
+      {inner}
+    </Link>
+  );
+}
+
+function HeroCalculatorCta({ href, label }: { href: string; label: string }) {
+  const external = isExternalHref(href);
+  const classes = cn(
+    "inline-flex max-w-full items-center justify-center gap-2 rounded-full px-7 py-2.5 text-center text-sm font-semibold text-emerald-950 shadow-[0_10px_36px_-8px_rgba(34,197,94,0.55)] transition-[transform,box-shadow,background-color] duration-300",
+    "bg-lime-400 hover:-translate-y-0.5 hover:bg-lime-300 hover:shadow-[0_14px_44px_-8px_rgba(34,197,94,0.6)]",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-300/90 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a2520]",
+    "sm:px-9 sm:py-3 sm:text-base"
+  );
+
+  const inner = (
+    <>
+      <Zap className="size-4 shrink-0 sm:size-[1.15rem]" strokeWidth={2.25} aria-hidden />
+      <span>{label}</span>
     </>
   );
 
@@ -250,6 +286,10 @@ export function HeroBanner() {
               href={heroContent.secondaryCta.href}
               label={heroContent.secondaryCta.label}
             />
+            <HeroCalculatorCta
+              href={heroContent.calculatorCta.href}
+              label="Kazancını hesapla"
+            />
           </motion.div>
 
           <motion.p
@@ -261,6 +301,15 @@ export function HeroBanner() {
               className="underline decoration-white/30 underline-offset-[5px] transition-colors hover:text-white hover:decoration-white/60"
             >
               {heroContent.tertiaryCta.label}
+            </Link>
+            <span className="mx-2 text-white/35" aria-hidden>
+              ·
+            </span>
+            <Link
+              href={heroContent.calculatorCta.href}
+              className="underline decoration-white/30 underline-offset-[5px] transition-colors hover:text-white hover:decoration-white/60"
+            >
+              {heroContent.calculatorCta.label}
             </Link>
           </motion.p>
 

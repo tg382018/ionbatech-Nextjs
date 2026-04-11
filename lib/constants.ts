@@ -21,6 +21,9 @@ export const navLinks = [
 export const contactHref = `${storeBaseUrl}/iletisim`;
 export const shopHomeHref = storeBaseUrl;
 
+/** Güneş / tüketim hesaplayıcı sihirbazı (site içi). */
+export const solarCalculatorHref = "/quiz";
+
 export const heroContent = {
   headlineLine1: "Enerji depolama ve solar sistemlerde",
   headlineLine2: "mühendislikle kurulan güvenilir altyapı.",
@@ -29,6 +32,10 @@ export const heroContent = {
   primaryCta: { label: "Teklif Al", href: contactHref },
   secondaryCta: { label: "Sistem Planınızı Görün", href: "/#surec" },
   tertiaryCta: { label: "Çözümlerimiz", href: "/#cozumler" },
+  calculatorCta: {
+    label: "Tasarruf Hesaplayıcı",
+    href: solarCalculatorHref,
+  },
 } as const;
 
 /** Full-bleed hero: video arka plan + poster / hareket azaltma yedeği. */

@@ -7,6 +7,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { PartnersSection } from "@/components/sections/partners-section";
 import { ProblemSection } from "@/components/sections/problem-section";
 import { ProcessSection } from "@/components/sections/process-section";
+import { SolarCalculatorPromoSection } from "@/components/sections/solar-calculator-promo-section";
 import { SolutionsSection } from "@/components/sections/solutions-section";
 import { StatsSection } from "@/components/sections/stats-section";
 import { SystemArchitectureSection } from "@/components/sections/system-architecture-section";
@@ -29,6 +30,7 @@ export default function Home() {
         <UseCasesSection />
         <WhyUsSection />
         <ProcessSection />
+        <SolarCalculatorPromoSection />
         <CategoriesSection />
         <FaqSection />
         <CtaSection />

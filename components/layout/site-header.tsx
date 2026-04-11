@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,6 +14,7 @@ import {
   logoSrc,
   navLinks,
   shopHomeHref,
+  solarCalculatorHref,
 } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -55,10 +56,13 @@ export function SiteHeader() {
   const [pastBanner, setPastBanner] = useState(false);
   const isHome = pathname === "/";
   const isBlog = pathname?.startsWith("/blog") ?? false;
+  const isQuiz = pathname === "/quiz";
   /** Video banner üzerindeyken beyaz nav; aşağı kayınca (banner bitti) koyu tipografi */
   const lightOnVideo = isHome && !pastBanner;
   /** Ana sayfada banner geçilince yüzen kapsül yukarı çöküp ince tam genişlik şeridine döner */
   const collapsed = isHome && pastBanner;
+  /** Quiz: ana sayfa scroll sonrası (collapsed) ile aynı beyaz şerit ve tipografi */
+  const collapsedLike = collapsed || isQuiz;
 
   useEffect(() => {
     if (!isHome) {
@@ -89,14 +93,10 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  if (pathname?.startsWith("/quiz")) {
-    return null;
-  }
-
   const outlineBtnClass = cn(
     buttonVariants({ variant: "outline", size: "lg" }),
     "rounded-full font-semibold shadow-sm transition-colors duration-300",
-    collapsed ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6",
+    collapsedLike ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6",
     lightOnVideo &&
       "border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
     isHome &&
@@ -104,8 +104,11 @@ export function SiteHeader() {
       "border-stone-300/90 bg-white text-[#126458] hover:bg-stone-50",
     isBlog &&
       "border-stone-300/90 bg-white text-[#126458] hover:bg-stone-50",
+    isQuiz &&
+      "border-stone-300/90 bg-white text-[#126458] hover:bg-stone-50",
     !isHome &&
       !isBlog &&
+      !isQuiz &&
       "border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
   );
 
@@ -113,7 +116,7 @@ export function SiteHeader() {
   const shopBtnClass = cn(
     buttonVariants({ variant: "outline", size: "lg" }),
     "header-shop-btn inline-flex items-center justify-center rounded-full font-semibold transition-colors duration-300",
-    collapsed ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6",
+    collapsedLike ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6",
     lightOnVideo &&
       cn(
         "border-emerald-300/65 bg-white/[0.16] text-white backdrop-blur-sm hover:border-emerald-200/80 hover:bg-white/24",
@@ -130,8 +133,14 @@ export function SiteHeader() {
         "border-[#126458]/50 bg-white text-[#126458] shadow-sm hover:border-[#126458]/70 hover:bg-emerald-50/95",
         "header-shop-glow-light header-shop-btn-light"
       ),
+    isQuiz &&
+      cn(
+        "border-[#126458]/50 bg-white text-[#126458] shadow-sm hover:border-[#126458]/70 hover:bg-emerald-50/95",
+        "header-shop-glow-light header-shop-btn-light"
+      ),
     !isHome &&
       !isBlog &&
+      !isQuiz &&
       cn(
         "border-emerald-400/60 bg-white/[0.13] text-white backdrop-blur-sm hover:border-emerald-300/75 hover:bg-white/22",
         "header-shop-glow-dark"
@@ -141,26 +150,44 @@ export function SiteHeader() {
   const primaryBtnClass = cn(
     buttonVariants({ variant: "default", size: "lg" }),
     "rounded-full border-0 bg-[#126458] font-semibold text-white shadow-md hover:bg-[#0e4d44]",
-    collapsed ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6"
+    collapsedLike ? "h-10 min-h-10 px-5 text-sm" : "h-10 px-6"
+  );
+
+  const calculatorNavClass = cn(
+    "inline-flex shrink-0 items-center gap-1.5 rounded-full font-semibold transition-colors duration-300",
+    collapsedLike ? "h-10 min-h-10 px-4 text-sm" : "h-10 px-5 text-sm",
+    lightOnVideo &&
+      "border border-lime-400/50 bg-lime-400/14 text-white backdrop-blur-sm hover:border-lime-300/70 hover:bg-lime-400/24",
+    isHome &&
+      pastBanner &&
+      "border-lime-500/40 bg-lime-500 text-white shadow-sm hover:bg-lime-600",
+    isBlog &&
+      "border-lime-500/40 bg-lime-500 text-white shadow-sm hover:bg-lime-600",
+    isQuiz &&
+      "border-lime-500/40 bg-lime-500 text-white shadow-sm hover:bg-lime-600",
+    !isHome &&
+      !isBlog &&
+      !isQuiz &&
+      "border-lime-400/45 bg-lime-400/14 text-white hover:bg-lime-400/26"
   );
 
   const navLinkClass = cn(
     "whitespace-nowrap font-medium transition-colors duration-300",
-    collapsed ? "text-[14px] lg:text-[15px]" : "text-[15px]",
+    collapsedLike ? "text-[14px] lg:text-[15px]" : "text-[15px]",
     lightOnVideo && "text-white hover:text-white/85",
-    (isHome && pastBanner) || isBlog
+    (isHome && pastBanner) || isBlog || isQuiz
       ? "text-stone-900 hover:text-[#126458]"
       : null,
-    !isHome && !isBlog && "text-white hover:text-white/85"
+    !isHome && !isBlog && !isQuiz && "text-white hover:text-white/85"
   );
 
   const menuBtnClass = cn(
     "shrink-0 transition-colors duration-300 md:hidden",
     lightOnVideo && "text-white hover:bg-white/10",
-    (isHome && pastBanner) || isBlog
+    (isHome && pastBanner) || isBlog || isQuiz
       ? "text-stone-900 hover:bg-stone-200/60"
       : null,
-    !isHome && !isBlog && "text-white hover:bg-white/10"
+    !isHome && !isBlog && !isQuiz && "text-white hover:bg-white/10"
   );
 
   return (
@@ -180,10 +207,13 @@ export function SiteHeader() {
             "max-w-[1300px] rounded-2xl border border-white/20 bg-white/20 px-4 py-2.5 shadow-lg sm:px-8 sm:py-3",
           collapsed &&
             "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/95 px-4 py-3 shadow-md sm:px-6 sm:py-3.5",
+          isQuiz &&
+            "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/95 px-4 py-3 shadow-md sm:px-6 sm:py-3.5",
           isBlog &&
             "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-stone-50/95 px-4 py-3.5 shadow-sm sm:px-6 sm:py-3.5",
           !isHome &&
             !isBlog &&
+            !isQuiz &&
             "w-full max-w-none rounded-none border-x-0 border-t-0 border-b border-white/15 bg-slate-950/80 px-4 py-3.5 shadow-lg sm:px-6 sm:py-4"
         )}
         aria-label="Ana navigasyon"
@@ -191,14 +221,14 @@ export function SiteHeader() {
         <div
           className={cn(
             "mx-auto flex w-full items-center justify-between",
-            collapsed ? "max-w-[1300px] gap-2 sm:gap-3" : "max-w-[1300px] gap-3"
+            collapsedLike ? "max-w-[1300px] gap-2 sm:gap-3" : "max-w-[1300px] gap-3"
           )}
         >
           <Link
             href="/"
             className={cn(
               "relative flex shrink-0 items-center",
-              collapsed
+              collapsedLike
                 ? "h-11 w-[10.5rem] sm:h-12 sm:w-[12rem]"
                 : "h-11 w-[11rem] sm:h-12 sm:w-[12.5rem]"
             )}
@@ -210,7 +240,7 @@ export function SiteHeader() {
               className={cn(
                 "object-contain object-left transition-[filter] duration-300",
                 lightOnVideo && "brightness-0 invert",
-                !isHome && !isBlog && "brightness-0 invert",
+                !isHome && !isBlog && !isQuiz && "brightness-0 invert",
               )}
               sizes="(max-width: 640px) 152px, 176px"
               priority
@@ -222,7 +252,7 @@ export function SiteHeader() {
             <ul
               className={cn(
                 "flex items-center",
-                collapsed ? "gap-3 lg:gap-4" : "gap-5 lg:gap-6"
+                collapsedLike ? "gap-3 lg:gap-4" : "gap-5 lg:gap-6"
               )}
             >
               {navLinks.map((link) => (
@@ -238,9 +268,13 @@ export function SiteHeader() {
           <div
             className={cn(
               "hidden items-center md:flex",
-              collapsed ? "gap-1.5 sm:gap-2" : "gap-2 sm:gap-3"
+              collapsedLike ? "gap-1.5 sm:gap-2" : "gap-2 sm:gap-3"
             )}
           >
+            <Link href={solarCalculatorHref} className={calculatorNavClass}>
+              <Zap className="size-4 opacity-95" aria-hidden />
+              Hesapla
+            </Link>
             <NavAnchor href={shopHomeHref} className={shopBtnClass}>
               <span className="relative z-[1]">Mağaza</span>
             </NavAnchor>
@@ -273,6 +307,8 @@ export function SiteHeader() {
             "p-4 shadow-md backdrop-blur-md transition-[margin,border-radius] duration-300 ease-out md:hidden",
             collapsed &&
               "mt-0 rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/98",
+            isQuiz &&
+              "mt-0 rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white/98",
             isBlog &&
               "mt-0 rounded-none border-x-0 border-t-0 border-b border-stone-200/90 bg-white shadow-md",
             isHome &&
@@ -280,6 +316,7 @@ export function SiteHeader() {
               "mt-2 mx-0 rounded-2xl border border-white/20 bg-slate-950/90",
             !isHome &&
               !isBlog &&
+              !isQuiz &&
               "mt-2 mx-4 rounded-2xl border border-white/20 bg-slate-950/90"
           )}
         >
@@ -290,7 +327,7 @@ export function SiteHeader() {
                   href={link.href}
                   className={cn(
                     "block rounded-xl py-2.5 text-base font-medium transition-colors duration-300",
-                    (isHome && pastBanner) || isBlog
+                    (isHome && pastBanner) || isBlog || isQuiz
                       ? "text-stone-900 hover:text-[#126458]"
                       : "text-white hover:text-white/85"
                   )}
@@ -304,11 +341,22 @@ export function SiteHeader() {
           <div
             className={cn(
               "mt-4 space-y-3 border-t pt-4",
-              isHome && pastBanner || isBlog
+              isHome && pastBanner || isBlog || isQuiz
                 ? "border-stone-200"
                 : "border-white/15"
             )}
           >
+            <Link
+              href={solarCalculatorHref}
+              className={cn(
+                calculatorNavClass,
+                "flex h-11 w-full justify-center"
+              )}
+              onClick={() => setOpen(false)}
+            >
+              <Zap className="size-4" aria-hidden />
+              Tasarruf hesaplayıcı
+            </Link>
             <NavAnchor
               href={shopHomeHref}
               className={cn(

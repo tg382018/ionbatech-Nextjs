@@ -18,7 +18,7 @@ export const navLinks = [
   { label: "İletişim", href: "/#iletisim" },
 ] as const;
 
-export const contactHref = `${storeBaseUrl}/iletisim`;
+export const contactHref = "https://api.whatsapp.com/send?phone=905520089637&text=%C3%9Cr%C3%BCnleriniz%20hakk%C4%B1nda%20detayl%C4%B1%20bilgi%20almak%20istiyorum";
 export const shopHomeHref = storeBaseUrl;
 
 /** Güneş / tüketim hesaplayıcı sihirbazı (site içi). */

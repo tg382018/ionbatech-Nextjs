@@ -9,6 +9,7 @@ import {
   formatBlogDate,
   getPublishedPostBySlug,
 } from "@/lib/blog-data";
+import { renderBlogHtml } from "@/lib/sanitize-blog-html";
 
 export const revalidate = 60;
 
@@ -83,11 +84,10 @@ export default async function BlogPostPage({ params }: Props) {
           />
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl space-y-6 text-base leading-relaxed text-foreground/90">
-          {post.paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
-        </div>
+        <div
+          className="blog-content mx-auto mt-10 max-w-3xl text-base leading-relaxed text-foreground/90"
+          dangerouslySetInnerHTML={{ __html: renderBlogHtml(post.paragraphs) }}
+        />
 
         <div className="mx-auto mt-14 max-w-3xl border-t border-border pt-10">
           <Link

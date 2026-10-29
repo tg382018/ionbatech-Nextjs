@@ -6,11 +6,7 @@ import { updateBlogPostAction } from "@/app/admin/dashboard/blog/actions";
 import { BlogEditorForm } from "@/components/admin/blog-editor-form";
 import { Button } from "@/components/ui/button";
 import { getBlogPostRowByIdForAdmin } from "@/lib/blog-admin-queries";
-
-function paragraphsToBody(raw: unknown): string {
-  if (!Array.isArray(raw)) return "";
-  return raw.filter((x): x is string => typeof x === "string").join("\n\n");
-}
+import { paragraphsToEditorHtml } from "@/lib/blog-content";
 
 export default async function AdminBlogEditPage({
   params,
@@ -34,7 +30,7 @@ export default async function AdminBlogEditPage({
     excerpt: row.excerpt,
     coverUrl: row.cover_image_src,
     seoTags: row.seo_tags ?? "",
-    body: paragraphsToBody(row.paragraphs),
+    body: paragraphsToEditorHtml(row.paragraphs),
   };
 
   return (

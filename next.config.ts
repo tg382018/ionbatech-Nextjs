@@ -11,21 +11,25 @@ const remotePatterns: NonNullable<
     },
   ];
 
+const storageHosts = new Set<string>(["lpiajnffpcqnjbwqekzn.supabase.co"]);
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 if (supabaseUrl) {
   try {
-    const host = new URL(supabaseUrl).hostname;
-    remotePatterns.push({
-      protocol: "https",
-      hostname: host,
-      pathname: "/storage/v1/object/public/**",
-    });
+    storageHosts.add(new URL(supabaseUrl).hostname);
   } catch {
     /* ignore invalid URL */
   }
 }
+for (const hostname of storageHosts) {
+  remotePatterns.push({
+    protocol: "https",
+    hostname,
+    pathname: "/storage/v1/object/public/**",
+  });
+}
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["127.0.0.1"],
   images: {
     remotePatterns,
     /** Varsayılan [..384] sonrası doğrudan 640’a sıçınıyordu; kart ~220px@2x için ara genişlikler. */

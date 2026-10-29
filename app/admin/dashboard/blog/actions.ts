@@ -4,6 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { isAdminSessionValid } from "@/lib/admin-session";
+import { plainTextFromHtml } from "@/lib/blog-content";
+import { uploadBlogImageFile } from "@/lib/blog-storage";
+import { paragraphsFromEditorHtml } from "@/lib/sanitize-blog-html";
 import { slugifyTitle } from "@/lib/slug";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -14,17 +17,29 @@ async function requireAdmin() {
 }
 
 function readingMinutesFromBody(body: string): number {
-  const words = body.trim().split(/\s+/).filter(Boolean).length;
+  const words = plainTextFromHtml(body).split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));
 }
 
 function paragraphsFromBody(body: string): string[] {
-  const parts = body
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  if (parts.length) return parts;
-  return body.trim() ? [body.trim()] : [];
+  return paragraphsFromEditorHtml(body);
+}
+
+export async function uploadBlogImageAction(formData: FormData): Promise<
+  { ok: true; url: string } | { ok: false; error: string }
+> {
+  try {
+    await requireAdmin();
+    const file = formData.get("file");
+    if (!(file instanceof File) || file.size === 0) {
+      return { ok: false, error: "Dosya seçilmedi." };
+    }
+    const url = await uploadBlogImageFile(file);
+    return { ok: true, url };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Yükleme başarısız.";
+    return { ok: false, error: message };
+  }
 }
 
 export async function createBlogPostAction(formData: FormData) {
@@ -44,7 +59,7 @@ export async function createBlogPostAction(formData: FormData) {
   if (!title || !coverUrl) {
     redirect(
       "/admin/dashboard/blog/yeni?error=" +
-        encodeURIComponent("Başlık ve kapak URL zorunludur.")
+        encodeURIComponent("Başlık ve kapak görseli zorunludur.")
     );
   }
 
@@ -101,7 +116,7 @@ export async function updateBlogPostAction(formData: FormData) {
   if (!title || !coverUrl) {
     redirect(
       `/admin/dashboard/blog/${id}/duzenle?error=` +
-        encodeURIComponent("Başlık ve kapak URL zorunludur.")
+        encodeURIComponent("Başlık ve kapak görseli zorunludur.")
     );
   }
 
